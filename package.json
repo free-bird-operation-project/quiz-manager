@@ -4,6 +4,7 @@
 	"description": "Streamlining quiz management effortlessly",
 	"main": "index.js",
 	"scripts": {
+		"prettier": "npx prettier . --write",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [
@@ -13,5 +14,11 @@
 		"file-manager"
 	],
 	"author": "Free Bird Operation Project",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"eslint": "^9.2.0"
+	},
+	"devDependencies": {
+		"prettier": "^3.2.5"
+	}
 }

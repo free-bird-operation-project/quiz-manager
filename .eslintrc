@@ -1,0 +1,33 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true,
+		"jest": true
+	},
+	"extends": "eslint:recommended",
+	"parserOptions": {
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"globals": {
+		"global": "readonly",
+		"document": "readonly",
+		"window": "readonly",
+		"HTMLElement": "readonly"
+	},
+	"rules": {
+		"indent": ["off"],
+		"linebreak-style": ["error", "windows"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "never"]
+	},
+	"ignorePatterns": [
+		"node_modules/",
+		"webpack.config.common.js",
+		"webpack.config.prod.js",
+		"webpack.config.dev.js",
+		"dist/",
+		"coverage/",
+		"vercel/"
+	]
+}
