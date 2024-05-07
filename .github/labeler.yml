@@ -1,0 +1,49 @@
+# For changed dependencies
+📦 dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - yarn.lock
+
+# For changes in documentation
+📖 documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/*.md
+          - docs/**/*.md
+
+# For changes in source code
+✨ enhancement:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/*
+
+# For changes in site
+🌏 site:
+  - changed-files:
+      - any-glob-to-any-file:
+          - public/*
+
+# For changes in configuration
+⚙️ configs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .prettierrc
+          - .eslintrc
+          - .babelrc
+          - webpack.config.*.js
+          - .jestrc
+
+# For changes in service worker
+👷🏼‍♂️ service worker:
+  - changed-files:
+      - any-glob-to-any-file:
+          - public/service-worker.js
+          - public/workbox-config.js
+          - public/src-sw.js
+          - public/sw.js
+
+# For changes in locale
+💬 localization:
+  - changed-files:
+      - any-glob-to-any-file:
+          - locale/*
