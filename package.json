@@ -23,6 +23,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"eslint": "^9.2.0",
+		"vercel": "^34.1.9",
 		"webpack": "^5.91.0"
 	},
 	"devDependencies": {
