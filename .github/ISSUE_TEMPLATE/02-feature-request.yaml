@@ -1,0 +1,30 @@
+name: Feature Request
+description: Share with us your ideas on how Quiz Manager could be improved upon.
+labels: ['✨ enhancement']
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description,
+      description: Try to describe in detail the feature you wish existed.
+      placeholder: e.g. I want to be able to lock certain quizzes while editing.
+    validations:
+      required: true
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use cases,
+      description: Why do you need this feature? Provide real-life use cases as to why this feature will be useful for others.
+      placeholder: e.g. Sometimes, I accidentally edit a quiz that is not intended for editing.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist,
+      description: Please check the following items before submitting your issue.
+      options:
+        - label: I have searched the existing issues to make sure this bug has not already been reported.
+          required: true
+    validations:
+      required: true
