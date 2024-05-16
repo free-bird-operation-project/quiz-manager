@@ -1,7 +1,12 @@
 'use strict'
 
 function hasValidTypes(config) {
-	if (!config || config === undefined || Object.keys(config).length === 0) {
+	if (
+		!config ||
+		config === undefined ||
+		Object.keys(config).length === 0 ||
+		typeof config !== 'object'
+	) {
 		console.error("Make sure the 'config' is not empty.")
 		return false
 	}
