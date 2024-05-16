@@ -15,7 +15,7 @@ class Snackbar {
 	}
 
 	remove() {
-		removeSnackbar(this.config)
+		removeSnackbar()
 	}
 }
 
