@@ -5,10 +5,9 @@ import { isConfigVerified } from '../../utilities/config/config-verifier'
 
 function createButton(config) {
 	if (!isConfigVerified(config)) return
-	const { type, id, class_name, icon, text, events } = config
 
+	const { type, id, class_name, icon, text, events } = config
 	let button
-	if (!events) console.error('Button is useless without events.')
 
 	switch (type) {
 		case 'rounded-square':
