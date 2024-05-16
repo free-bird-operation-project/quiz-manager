@@ -1,45 +1,86 @@
 'use strict';
-export function hasValidTypes(config) {
+function hasValidTypes(config) {
+	if (!config || config === undefined || Object.keys(config).length === 0) {
+		console.error("Make sure the 'config' is not empty.");
+		return false;
+	}
+
+	const { id, class_name, text, icon, type, events, buttons } = config;
 	let flag = true;
-	const LIST_OF_CONDITION_FOR_TYPES = [
+	const LIST_OF_VALID_TYPES = [
 		{
-			condition: typeof config !== 'object',
-			message: 'The given configuration is not an object.'
+			string: {
+				id: id,
+				class_name: class_name,
+				text: text,
+				icon: icon,
+				type: type
+			}
 		},
 		{
-			condition:
-				config.class_name !== undefined &&
-				typeof config.class_name !== 'string',
-			message: 'The class_name is not a string.'
-		},
-		{
-			condition: config.text !== undefined && typeof config.text !== 'string',
-			message: 'The text is not a string.'
-		},
-		{
-			condition: config.id !== undefined && typeof config.id !== 'string',
-			message: 'The id is not a string.'
-		},
-		{
-			condition: config.icon !== undefined && typeof config.icon !== 'string',
-			message: 'The icon is not a string.'
-		},
-		{
-			condition: config.type !== undefined && typeof config.type !== 'string',
-			message: 'The type is not a string.'
-		},
-		{
-			condition: config.events !== undefined && !Array.isArray(config.events),
-			message: 'The events is not an array.'
+			array: {
+				events: events,
+				buttons: buttons
+			}
 		}
 	];
 
-	LIST_OF_CONDITION_FOR_TYPES.forEach((item) => {
-		if (item.condition) {
-			console.error(item.message);
+	for (const VALID_TYPES_OBJECT of LIST_OF_VALID_TYPES) {
+		validateValidTypes(VALID_TYPES_OBJECT);
+	}
+
+	function validateValidTypes(VALID_TYPES_OBJECT) {
+		for (const TYPE in VALID_TYPES_OBJECT) {
+			const LIST_OF_ATTRIBUTES = VALID_TYPES_OBJECT[TYPE];
+			validateAttributesOfType(TYPE, LIST_OF_ATTRIBUTES);
+		}
+	}
+
+	function validateAttributesOfType(TYPE, LIST_OF_ATTRIBUTES) {
+		for (const ATTRIBUTE in LIST_OF_ATTRIBUTES) {
+			if (TYPE === 'array') {
+				validateArrayAttribute(ATTRIBUTE, LIST_OF_ATTRIBUTES);
+			} else {
+				validateNonArrayAttribute(ATTRIBUTE, LIST_OF_ATTRIBUTES, TYPE);
+			}
+		}
+	}
+
+	function validateArrayAttribute(ATTRIBUTE, LIST_OF_ATTRIBUTES) {
+		const IS_NOT_ARRAY = !Array.isArray(LIST_OF_ATTRIBUTES[ATTRIBUTE]);
+		const IS_UNDEFINED = LIST_OF_ATTRIBUTES[ATTRIBUTE] !== undefined;
+
+		if (IS_NOT_ARRAY && IS_UNDEFINED) {
+			let actual_type = getActualType(LIST_OF_ATTRIBUTES[ATTRIBUTE]);
+
+			console.error(
+				`The attribute '${ATTRIBUTE}' is '${actual_type}' not a type of 'array'.`
+			);
 			flag = false;
 		}
-	});
+	}
 
+	function validateNonArrayAttribute(ATTRIBUTE, LIST_OF_ATTRIBUTES, TYPE) {
+		const IS_NOT_TYPE = typeof LIST_OF_ATTRIBUTES[ATTRIBUTE] !== TYPE;
+		const IS_UNDEFINED = LIST_OF_ATTRIBUTES[ATTRIBUTE] !== undefined;
+
+		if (IS_NOT_TYPE && IS_UNDEFINED) {
+			let actual_type = getActualType(LIST_OF_ATTRIBUTES[ATTRIBUTE]);
+
+			console.error(
+				`The attribute '${ATTRIBUTE}' is '${actual_type}' not a type of '${TYPE}'.`
+			);
+			flag = false;
+		}
+	}
+
+	function getActualType(attribute) {
+		if (Array.isArray(attribute)) return 'array';
+		return typeof attribute;
+	}
+
+	console.log(flag);
 	return flag;
 }
+
+export { hasValidTypes };
