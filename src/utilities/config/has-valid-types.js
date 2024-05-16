@@ -1,4 +1,5 @@
 'use strict';
+
 function hasValidTypes(config) {
 	if (!config || config === undefined || Object.keys(config).length === 0) {
 		console.error("Make sure the 'config' is not empty.");
@@ -79,7 +80,6 @@ function hasValidTypes(config) {
 		return typeof attribute;
 	}
 
-	console.log(flag);
 	return flag;
 }
 
