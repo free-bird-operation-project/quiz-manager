@@ -6,7 +6,8 @@ import { removeTab } from './tab-remove'
 
 class Tab {
 	constructor(config) {
-		this.config = isConfigVerified() ? config : {}
+		this.name = 'tab'
+		this.config = isConfigVerified(this.name, config) ? config : {}
 	}
 
 	create() {
