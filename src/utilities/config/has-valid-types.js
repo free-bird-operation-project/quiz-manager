@@ -29,9 +29,8 @@ export function hasValidTypes(config) {
 			message: 'The type is not a string.'
 		},
 		{
-			condition:
-				config.events !== undefined && typeof config.events !== 'object',
-			message: 'The events is not an object.'
+			condition: config.events !== undefined && !Array.isArray(config.events),
+			message: 'The events is not an array.'
 		}
 	];
 
