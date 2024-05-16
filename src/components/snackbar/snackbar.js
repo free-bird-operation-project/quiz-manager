@@ -1,8 +1,7 @@
 'use strict'
 
 import { isConfigVerified } from '../../utilities/config/config-verifier'
-import { renderSnackbar } from './snackbar-render'
-import { removeSnackbar } from './snackbar-remove'
+import { renderThenRemoveSnackbar } from './snackbar-render-then-remove'
 
 class Snackbar {
 	constructor(config) {
@@ -10,12 +9,8 @@ class Snackbar {
 		this.config = isConfigVerified(this.name, config) ? config : {}
 	}
 
-	render() {
-		renderSnackbar(this.config)
-	}
-
-	remove() {
-		removeSnackbar()
+	renderThenRemove() {
+		renderThenRemoveSnackbar(this.config)
 	}
 }
 
