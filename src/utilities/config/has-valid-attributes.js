@@ -1,26 +1,35 @@
 'use strict';
 
-function hasValidAttributes(config) {
+function hasValidAttributes(component, config) {
 	const LIST_OF_VALID_ATTRIBUTES = [
-		'class_name',
-		'id',
-		'text',
-		'events',
-		'icon',
-		'type'
+		{ button: ['class_name', 'id', 'text', 'events', 'icon', 'type'] },
+		{ tab: ['buttons'] }
 	];
+
+	const VALID_COMPONENTS = LIST_OF_VALID_ATTRIBUTES.find((list_object) =>
+		list_object.hasOwnProperty(component)
+	);
+
+	if (!VALID_COMPONENTS) {
+		console.error(`The ${component} is not found in the list.`);
+		return false;
+	}
+
+	const VALID_ATTRIBUTES = VALID_COMPONENTS[`${component}`];
+	const CONFIG_KEYS = Object.keys(config);
+	const INVALID_KEYS = CONFIG_KEYS.filter(
+		(KEY) => !VALID_ATTRIBUTES.includes(KEY)
+	);
 	let flag = true;
 
-	LIST_OF_VALID_ATTRIBUTES.forEach((valid_attribute) => {
-		config.forEach((config_attribute) => {
-			if (config_attribute !== valid_attribute) {
-				console.error(
-					`The attribute ${config_attribute} is not recognized as valid.`
-				);
-				flag = false;
-			}
+	if (INVALID_KEYS.length > 0) {
+		INVALID_KEYS.forEach((INVALID_KEY) => {
+			console.error(
+				`The '${INVALID_KEY}' is not valid attribute for '${component}'.`
+			);
+			flag = false;
 		});
-	});
+	}
 
 	return flag;
 }
