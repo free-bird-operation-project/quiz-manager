@@ -6,7 +6,8 @@ import { removeButton } from './button-remove'
 
 class Button {
 	constructor(config) {
-		this.config = isConfigVerified() ? config : {}
+		this.name = 'button'
+		this.config = isConfigVerified(this.name, config) ? config : {}
 	}
 
 	create() {
