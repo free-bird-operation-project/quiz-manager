@@ -22,7 +22,6 @@ function setEvents(id, events) {
 		element.addEventListener(event_name, event_handler)
 	}
 
-	console.log('Events attached successfully.')
 	return true
 }
 
