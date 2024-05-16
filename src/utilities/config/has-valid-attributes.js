@@ -4,7 +4,8 @@ function hasValidAttributes(component, config) {
 	const LIST_OF_VALID_ATTRIBUTES = [
 		{ button: ['class_name', 'id', 'text', 'events', 'icon', 'type'] },
 		{ tab: ['buttons'] },
-		{ snackbar: ['message'] }
+		{ snackbar: ['message'] },
+		{ checkbox: ['state', 'target_id'] }
 	]
 
 	const VALID_COMPONENTS = LIST_OF_VALID_ATTRIBUTES.find((list_object) =>
