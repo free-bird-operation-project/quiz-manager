@@ -35,7 +35,6 @@ function hasValidTypes(config) {
 		flag = validateValidTypes(VALID_TYPES_OBJECT, flag)
 	}
 
-	console.log(flag)
 	return flag
 }
 
