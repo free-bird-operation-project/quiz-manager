@@ -5,7 +5,7 @@ import { setAttributes } from '../../utilities/components/set-attributes'
 import { setEvents } from '../../utilities/components/set-events'
 
 function createButton(config) {
-	if (!isConfigVerified(config)) return
+	if (!isConfigVerified('button', config)) return
 
 	const { type, id, class_name, icon, text, events } = config
 	let button
