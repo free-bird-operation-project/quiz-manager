@@ -3,7 +3,8 @@
 function hasValidAttributes(component, config) {
 	const LIST_OF_VALID_ATTRIBUTES = [
 		{ button: ['class_name', 'id', 'text', 'events', 'icon', 'type'] },
-		{ tab: ['buttons'] }
+		{ tab: ['buttons'] },
+		{ snackbar: ['message'] }
 	];
 
 	const VALID_COMPONENTS = LIST_OF_VALID_ATTRIBUTES.find((list_object) =>
