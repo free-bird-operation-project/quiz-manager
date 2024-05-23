@@ -11,7 +11,22 @@ function hasValidTypes(config) {
 		return false
 	}
 
-	const { id, class_name, text, icon, type, events, buttons } = config
+	const {
+		id,
+		class_name,
+		text,
+		icon,
+		type,
+		events,
+		buttons,
+		group_name,
+		title,
+		placeholder,
+		z_index,
+		state,
+		readonly,
+		elements
+	} = config
 	let flag = true
 	const LIST_OF_VALID_TYPES = [
 		{
@@ -20,13 +35,32 @@ function hasValidTypes(config) {
 				class_name: class_name,
 				text: text,
 				icon: icon,
-				type: type
+				type: type,
+				group_name: group_name,
+				title: title,
+				placeholder: placeholder
 			}
 		},
 		{
 			array: {
 				events: events,
 				buttons: buttons
+			}
+		},
+		{
+			boolean: {
+				state: state,
+				readonly: readonly
+			}
+		},
+		{
+			number: {
+				z_index: z_index
+			}
+		},
+		{
+			object: {
+				elements: elements
 			}
 		}
 	]
