@@ -5,7 +5,8 @@ function hasValidAttributes(component, config) {
 		{ button: ['class_name', 'id', 'text', 'events', 'icon', 'type'] },
 		{ tab: ['buttons'] },
 		{ snackbar: ['message'] },
-		{ checkbox: ['id', 'class_name', 'state', 'target_id', 'group_name'] }
+		{ checkbox: ['id', 'class_name', 'state', 'target_id', 'group_name'] },
+		{ modal: ['id', 'title', 'icon', 'buttons'] }
 	]
 
 	const VALID_COMPONENTS = LIST_OF_VALID_ATTRIBUTES.find((list_object) =>
