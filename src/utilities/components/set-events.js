@@ -18,7 +18,7 @@ function setEvents(id, events) {
 	}
 
 	for (const event of events) {
-		const { event: event_name, func: event_handler } = event
+		const { event_name: event_name, func: event_handler } = event
 		element.addEventListener(event_name, event_handler)
 	}
 
