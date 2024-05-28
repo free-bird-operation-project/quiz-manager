@@ -7,3 +7,5 @@ function isElement(element) {
 
 	return true
 }
+
+export { isElement }
