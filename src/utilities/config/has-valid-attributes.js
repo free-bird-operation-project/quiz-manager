@@ -1,6 +1,16 @@
 'use strict'
 
 function hasValidAttributes(component, config) {
+	if (!component) {
+		console.error(`The ${component} is not found in the list.`)
+		return false
+	}
+
+	if (!config || typeof config !== 'object') {
+		console.error("The 'config' is not valid.")
+		return false
+	}
+
 	const LIST_OF_VALID_ATTRIBUTES = [
 		{ button: ['class_name', 'id', 'text', 'events', 'icon', 'type'] },
 		{ tab: ['buttons'] },
