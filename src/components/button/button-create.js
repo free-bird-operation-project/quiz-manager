@@ -7,7 +7,9 @@ import { setEvents } from '../../utilities/components/set-events'
 function createButton(config) {
 	if (!isConfigVerified('button', config)) return
 
-	const { type, id, class_name, icon, text, events } = config
+	const { type, id, class_name, icon, events } = config
+	let { text } = config
+
 	let button
 
 	switch (type) {
