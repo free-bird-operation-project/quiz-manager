@@ -56,7 +56,7 @@ function createContainer(icon, text, id, class_name, events, type) {
 	})
 
 	if (icon) {
-		const ICON_WRAPPER = document.createElement('div')
+		const ICON_WRAPPER = document.createElement('i')
 
 		setAttributes(ICON_WRAPPER, {
 			'data-lucide': icon
