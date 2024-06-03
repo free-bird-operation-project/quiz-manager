@@ -1,6 +1,6 @@
 'use strict'
 
-import { isConfigVerified } from '../../utilities/config/config-verifier'
+import { isConfigVerified } from '@utilities/config/config-verifier'
 import { createModal } from './modal-create'
 import { removeModal } from './modal-remove'
 

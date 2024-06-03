@@ -1,6 +1,6 @@
 'use strict'
 
-import { isConfigVerified } from '../../utilities/config/config-verifier'
+import { isConfigVerified } from '@utilities/config/config-verifier'
 
 function removeModal(config) {
 	if (!isConfigVerified(config)) return
