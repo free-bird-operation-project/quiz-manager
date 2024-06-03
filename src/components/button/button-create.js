@@ -1,8 +1,8 @@
 'use strict'
 
-import { isConfigVerified } from '../../utilities/config/config-verifier'
-import { setAttributes } from '../../utilities/components/set-attributes'
-import { setEvents } from '../../utilities/components/set-events'
+import { isConfigVerified } from '@utilities/config/config-verifier'
+import { setAttributes } from '@utilities/components/set-attributes'
+import { setEvents } from '@utilities/components/set-events'
 
 function createButton(config) {
 	if (!isConfigVerified('button', config)) return
