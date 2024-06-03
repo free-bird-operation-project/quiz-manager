@@ -1,6 +1,6 @@
 'use strict'
 
-import { isConfigVerified } from '../../utilities/config/config-verifier'
+import { isConfigVerified } from '@utilities/config/config-verifier'
 import { createCheckbox } from './checkbox-create'
 import { removeCheckbox } from './checkbox-remove'
 import { changeCheckboxState } from './checkbox-change-state'

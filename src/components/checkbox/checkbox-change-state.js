@@ -1,6 +1,6 @@
 'use strict'
 
-import { isConfigVerified } from '../../utilities/config/config-verifier'
+import { isConfigVerified } from '@utilities/config/config-verifier'
 
 function changeCheckboxState(config) {
 	if (!isConfigVerified('checkbox', config)) return
@@ -9,6 +9,8 @@ function changeCheckboxState(config) {
 
 	const initial_state = document.getElementById(id).dataset.state
 	const CHECKBOX = document.getElementById(id)
+
+	if (!CHECKBOX) return false
 
 	CHECKBOX.addEventListener('click', () => {
 		const state = changeState(initial_state)
