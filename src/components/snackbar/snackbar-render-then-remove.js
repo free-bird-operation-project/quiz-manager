@@ -1,7 +1,7 @@
 'use strict'
 
-import { setAttributes } from '../../utilities/components/set-attributes'
-import { isConfigVerified } from '../../utilities/config/config-verifier'
+import { setAttributes } from '@utilities/components/set-attributes'
+import { isConfigVerified } from '@utilities/config/config-verifier'
 
 function renderSnackbar(config) {
 	if (!isConfigVerified('snackbar', config)) return

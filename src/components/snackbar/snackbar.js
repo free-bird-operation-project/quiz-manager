@@ -1,6 +1,6 @@
 'use strict'
 
-import { isConfigVerified } from '../../utilities/config/config-verifier'
+import { isConfigVerified } from '@utilities/config/config-verifier'
 import { renderThenRemoveSnackbar } from './snackbar-render-then-remove'
 
 class Snackbar {
