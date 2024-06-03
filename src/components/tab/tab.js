@@ -1,6 +1,6 @@
 'use strict'
 
-import { isConfigVerified } from '../../utilities/config/config-verifier'
+import { isConfigVerified } from '@utilities/config/config-verifier'
 import { createTab } from './tab-create'
 import { removeTab } from './tab-remove'
 
