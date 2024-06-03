@@ -1,7 +1,7 @@
 'use strict'
 
-import { setAttributes } from '../../utilities/components/set-attributes'
-import { isConfigVerified } from '../../utilities/config/config-verifier'
+import { setAttributes } from '@utilities/components/set-attributes'
+import { isConfigVerified } from '@utilities/config/config-verifier'
 
 function createModal(config) {
 	if (!isConfigVerified(config)) return
