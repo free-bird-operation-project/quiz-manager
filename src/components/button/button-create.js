@@ -2,12 +2,11 @@
 
 import { isConfigVerified } from '@utilities/config/config-verifier'
 import { setAttributes } from '@utilities/components/set-attributes'
-import { setEvents } from '@utilities/components/set-events'
 
 function createButton(config) {
 	if (!isConfigVerified('button', config)) return
 
-	const { type, id, class_name, icon, events } = config
+	const { type, id, class_name, icon } = config
 	let { text } = config
 
 	let button
@@ -15,40 +14,21 @@ function createButton(config) {
 	switch (type) {
 		case 'rounded-square':
 			text = undefined
-			button = createContainer(
-				icon,
-				text,
-				id,
-				class_name,
-				events,
-				'rounded-square'
-			)
+			button = createContainer(icon, text, id, class_name, 'rounded-square')
 			break
 		case 'slab':
 			if (!text && !icon) return
-			button = createContainer(icon, text, id, class_name, events, 'slab')
+			button = createContainer(icon, text, id, class_name, 'slab')
 			break
 		default:
 			if (!text && !icon) return
-			button = createContainer(
-				icon,
-				text,
-				id,
-				class_name,
-				events,
-				'transparent'
-			)
+			button = createContainer(icon, text, id, class_name, 'transparent')
 	}
 
 	return button
 }
 
-function createContainer(icon, text, id, class_name, events, type) {
-	if (!events) {
-		console.error('Button is useless without events.')
-		return
-	}
-
+function createContainer(icon, text, id, class_name, type) {
 	const BUTTON = document.createElement('div')
 	setAttributes(BUTTON, {
 		id: `button-${id}`,
@@ -72,7 +52,6 @@ function createContainer(icon, text, id, class_name, events, type) {
 		BUTTON.appendChild(TEXT)
 	}
 
-	setEvents(events)
 	return BUTTON
 }
 

@@ -2,6 +2,7 @@
 
 import { isConfigVerified } from '@utilities/config/config-verifier'
 import { createButton } from './button-create'
+import { setEvents } from './button-set-events'
 import { removeButton } from './button-remove'
 
 class Button {
@@ -12,6 +13,10 @@ class Button {
 
 	create() {
 		createButton(this.config)
+	}
+
+	setEvents() {
+		setEvents(this.config)
 	}
 
 	remove() {
