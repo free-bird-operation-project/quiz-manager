@@ -1,19 +1,13 @@
 'use strict'
 
-function setEvents(id, events) {
-	if (!id) {
-		console.error('No ID to set events.')
+function setEvents(element, events) {
+	if (!element) {
+		console.error('No element to set events.')
 		return false
 	}
 
 	if (!events) {
 		console.error('No events to set.')
-		return false
-	}
-
-	const element = document.getElementById(id)
-	if (!element) {
-		console.error(`Element with ID ${id} not found.`)
 		return false
 	}
 
