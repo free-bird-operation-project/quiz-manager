@@ -11,60 +11,32 @@ global.MouseEvent = window.MouseEvent
 
 describe('setEvents', () => {
 	it('should set events on a valid HTML element', () => {
-		document.body.innerHTML = '<div id="test-div"></div>'
+		const element = document.createElement('div')
 		const mockHandler = jest.fn()
 		const events = [{ event_name: 'click', func: mockHandler }]
 
-		const result = setEvents('test-div', events)
-		const element = document.getElementById('test-div')
+		const result = setEvents(element, events)
 		element.click()
 
 		expect(result).toBe(true)
 		expect(mockHandler).toHaveBeenCalled()
 	})
 
-	it('should return false when ID is not provided', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
-		const events = [{ event_name: 'click', func: () => {} }]
-
-		const result = setEvents('', events)
-
-		expect(spyConsoleError).toHaveBeenCalledWith('No ID to set events.')
-		expect(result).toBe(false)
-		spyConsoleError.mockRestore()
-	})
-
 	it('should return false when events are not provided', () => {
 		const spyConsoleError = jest
 			.spyOn(console, 'error')
 			.mockImplementation(() => {})
+		const element = document.createElement('div')
 
-		const result = setEvents('test-div', null)
+		const result = setEvents(element, null)
 
 		expect(spyConsoleError).toHaveBeenCalledWith('No events to set.')
 		expect(result).toBe(false)
 		spyConsoleError.mockRestore()
 	})
 
-	it('should return false when element with given ID is not found', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
-		const events = [{ event_name: 'click', func: () => {} }]
-
-		const result = setEvents('nonexistent-id', events)
-
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			'Element with ID nonexistent-id not found.'
-		)
-		expect(result).toBe(false)
-		spyConsoleError.mockRestore()
-	})
-
 	it('should handle multiple events correctly', () => {
-		document.body.innerHTML = '<div id="test-div"></div>'
+		const element = document.createElement('div')
 		const mockClickHandler = jest.fn()
 		const mockMouseOverHandler = jest.fn()
 		const mockMouseDownHandler = jest.fn()
@@ -74,8 +46,7 @@ describe('setEvents', () => {
 			{ event_name: 'mousedown', func: mockMouseDownHandler }
 		]
 
-		const result = setEvents('test-div', events)
-		const element = document.getElementById('test-div')
+		const result = setEvents(element, events)
 		element.click()
 		element.dispatchEvent(new MouseEvent('mouseover'))
 		element.dispatchEvent(new MouseEvent('mousedown'))
