@@ -3,12 +3,12 @@
 function setEvents(element, events) {
 	if (!element) {
 		console.error('No element to set events.')
-		return false
+		return null
 	}
 
 	if (!events) {
 		console.error('No events to set.')
-		return false
+		return null
 	}
 
 	for (const event of events) {
@@ -16,7 +16,7 @@ function setEvents(element, events) {
 		element.addEventListener(event_name, event_handler)
 	}
 
-	return true
+	return element
 }
 
 export { setEvents }
