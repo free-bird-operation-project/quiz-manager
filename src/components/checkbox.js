@@ -49,7 +49,11 @@ class Checkbox {
 		console.log('New: ' + new_icon)
 		icon.dataset.lucide = new_icon
 
-		this.#manageTargets(node.dataset.groupName, node.dataset.targetId, new_state)
+		this.#manageTargets(
+			node.dataset.groupName,
+			node.dataset.targetId,
+			new_state
+		)
 	}
 
 	#changeState(state) {
