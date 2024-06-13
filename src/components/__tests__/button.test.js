@@ -45,13 +45,17 @@ describe('Button', () => {
 				expect(button).toBeDefined()
 				expect(mock_log).toHaveBeenCalledWith('It worked!')
 				expect(element.id).toBe('button-add-quiz')
-				expect(element.className).toBe('maker-button button rounded-square-button')
+				expect(element.className).toBe(
+					'maker-button button rounded-square-button'
+				)
 				expect(element.querySelector('[data-lucide="plus"]')).not.toBeNull()
 			})
 
 			describe('should create a slab type button', () => {
 				it('should create a button with icon and text', () => {
-					const mock_log = jest.spyOn(console, 'log').mockImplementation(() => {})
+					const mock_log = jest
+						.spyOn(console, 'log')
+						.mockImplementation(() => {})
 
 					const config = {
 						icon: 'attachment',
@@ -81,11 +85,15 @@ describe('Button', () => {
 					expect(mock_log).toHaveBeenCalledWith('It worked!')
 					expect(element.id).toBe('button-import-file')
 					expect(element.className).toBe('maker-button button slab-button')
-					expect(element.querySelector('[data-lucide="attachment"]')).not.toBeNull()
+					expect(
+						element.querySelector('[data-lucide="attachment"]')
+					).not.toBeNull()
 				})
 
 				it('should create a button with text only', () => {
-					const mock_log = jest.spyOn(console, 'log').mockImplementation(() => {})
+					const mock_log = jest
+						.spyOn(console, 'log')
+						.mockImplementation(() => {})
 
 					const config = {
 						text: 'Import File',
@@ -117,7 +125,9 @@ describe('Button', () => {
 				})
 
 				it('should not create a button without icon and text', () => {
-					const mock_log = jest.spyOn(console, 'log').mockImplementation(() => {})
+					const mock_log = jest
+						.spyOn(console, 'log')
+						.mockImplementation(() => {})
 
 					const config = {
 						id: 'import-file',
@@ -142,7 +152,9 @@ describe('Button', () => {
 
 			describe('should create a default type button', () => {
 				it('should create a button with icon and text', () => {
-					const mock_log = jest.spyOn(console, 'log').mockImplementation(() => {})
+					const mock_log = jest
+						.spyOn(console, 'log')
+						.mockImplementation(() => {})
 
 					const config = {
 						icon: 'attachment',
@@ -170,12 +182,18 @@ describe('Button', () => {
 					expect(button).toBeDefined()
 					expect(mock_log).toHaveBeenCalledWith('It worked!')
 					expect(element.id).toBe('button-import-file')
-					expect(element.className).toBe('maker-button button transparent-button')
-					expect(element.querySelector('[data-lucide="attachment"]')).not.toBeNull()
+					expect(element.className).toBe(
+						'maker-button button transparent-button'
+					)
+					expect(
+						element.querySelector('[data-lucide="attachment"]')
+					).not.toBeNull()
 				})
 
 				it('should create a button with text only', () => {
-					const mock_log = jest.spyOn(console, 'log').mockImplementation(() => {})
+					const mock_log = jest
+						.spyOn(console, 'log')
+						.mockImplementation(() => {})
 
 					const config = {
 						text: 'Import File',
@@ -202,11 +220,15 @@ describe('Button', () => {
 					expect(button).toBeDefined()
 					expect(mock_log).toHaveBeenCalledWith('It worked!')
 					expect(element.id).toBe('button-import-file')
-					expect(element.className).toBe('maker-button button transparent-button')
+					expect(element.className).toBe(
+						'maker-button button transparent-button'
+					)
 				})
 
 				it('should not create a button without icon and text', () => {
-					const mock_log = jest.spyOn(console, 'log').mockImplementation(() => {})
+					const mock_log = jest
+						.spyOn(console, 'log')
+						.mockImplementation(() => {})
 
 					const config = {
 						id: 'import-file',
@@ -259,7 +281,9 @@ describe('Button', () => {
 			expect(button).toBeDefined()
 			expect(mock_log).toHaveBeenCalledWith('It worked!')
 			expect(element.id).toBe('button-add-quiz')
-			expect(element.className).toBe('maker-button button rounded-square-button')
+			expect(element.className).toBe(
+				'maker-button button rounded-square-button'
+			)
 			expect(element.querySelector('[data-lucide="plus"]')).not.toBeNull()
 
 			button.remove()

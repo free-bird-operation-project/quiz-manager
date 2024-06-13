@@ -42,7 +42,13 @@ class Button {
 		switch (type) {
 			case 'rounded-square':
 				text = undefined
-				node = this.#createContainer(icon, text, id, class_name, 'rounded-square')
+				node = this.#createContainer(
+					icon,
+					text,
+					id,
+					class_name,
+					'rounded-square'
+				)
 				break
 			case 'slab':
 				if (!text && !icon) return
