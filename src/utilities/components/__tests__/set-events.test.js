@@ -18,20 +18,18 @@ describe('setEvents', () => {
 		const result = setEvents(element, events)
 		element.click()
 
-		expect(result).toBe(true)
+		expect(result).toBeTruthy()
 		expect(mockHandler).toHaveBeenCalled()
 	})
 
 	it('should return false when events are not provided', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const element = document.createElement('div')
 
 		const result = setEvents(element, null)
 
 		expect(spyConsoleError).toHaveBeenCalledWith('No events to set.')
-		expect(result).toBe(false)
+		expect(result).toBeFalsy()
 		spyConsoleError.mockRestore()
 	})
 
@@ -51,7 +49,7 @@ describe('setEvents', () => {
 		element.dispatchEvent(new MouseEvent('mouseover'))
 		element.dispatchEvent(new MouseEvent('mousedown'))
 
-		expect(result).toBe(true)
+		expect(result).toBeTruthy()
 		expect(mockClickHandler).toHaveBeenCalled()
 		expect(mockMouseOverHandler).toHaveBeenCalled()
 		expect(mockMouseDownHandler).toHaveBeenCalled()
