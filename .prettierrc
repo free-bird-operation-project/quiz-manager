@@ -6,5 +6,6 @@
 	"quoteProps": "consistent",
 	"bracketSpacing": true,
 	"trailingComma": "none",
-	"semi": false
+	"semi": false,
+	"printWidth": 100
 }
