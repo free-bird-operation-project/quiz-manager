@@ -24,9 +24,7 @@ describe('hasValidAttributes', () => {
 	})
 
 	it('should return false for a component with invalid attributes', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const component = 'button'
 		const config = {
 			class_name: 'btn',
@@ -48,9 +46,7 @@ describe('hasValidAttributes', () => {
 	})
 
 	it('should return false for an invalid component', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const component = 'invalid_component'
 		const config = {
 			class_name: 'btn',
@@ -59,9 +55,7 @@ describe('hasValidAttributes', () => {
 
 		const result = hasValidAttributes(component, config)
 
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			'The invalid_component is not found in the list.'
-		)
+		expect(spyConsoleError).toHaveBeenCalledWith('The invalid_component is not found in the list.')
 		expect(result).toBe(false)
 		spyConsoleError.mockRestore()
 	})
@@ -75,9 +69,7 @@ describe('hasValidAttributes', () => {
 	})
 
 	it('should return false when no component is passed', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const config = {
 			class_name: 'btn',
 			id: 'button-1'
@@ -85,17 +77,13 @@ describe('hasValidAttributes', () => {
 
 		const result = hasValidAttributes(undefined, config)
 
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			'The undefined is not found in the list.'
-		)
+		expect(spyConsoleError).toHaveBeenCalledWith('The undefined is not found in the list.')
 		expect(result).toBe(false)
 		spyConsoleError.mockRestore()
 	})
 
 	it('should return false when no config is passed', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const component = 'button'
 
 		const result = hasValidAttributes(component, null)

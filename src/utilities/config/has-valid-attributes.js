@@ -32,16 +32,12 @@ function hasValidAttributes(component, config) {
 
 	const VALID_ATTRIBUTES = VALID_COMPONENTS[`${component}`]
 	const CONFIG_KEYS = Object.keys(config)
-	const INVALID_KEYS = CONFIG_KEYS.filter(
-		(KEY) => !VALID_ATTRIBUTES.includes(KEY)
-	)
+	const INVALID_KEYS = CONFIG_KEYS.filter((KEY) => !VALID_ATTRIBUTES.includes(KEY))
 	let flag = true
 
 	if (INVALID_KEYS.length > 0) {
 		INVALID_KEYS.forEach((INVALID_KEY) => {
-			console.error(
-				`The '${INVALID_KEY}' is not valid attribute for '${component}'.`
-			)
+			console.error(`The '${INVALID_KEY}' is not valid attribute for '${component}'.`)
 			flag = false
 		})
 	}

@@ -85,12 +85,7 @@ function validateAttributesOfType(TYPE, LIST_OF_ATTRIBUTES, flag) {
 		if (TYPE === 'array') {
 			flag = validateArrayAttribute(ATTRIBUTE, LIST_OF_ATTRIBUTES, flag)
 		} else {
-			flag = validateNonArrayAttribute(
-				ATTRIBUTE,
-				LIST_OF_ATTRIBUTES,
-				TYPE,
-				flag
-			)
+			flag = validateNonArrayAttribute(ATTRIBUTE, LIST_OF_ATTRIBUTES, TYPE, flag)
 		}
 	}
 	return flag
@@ -103,9 +98,7 @@ function validateArrayAttribute(ATTRIBUTE, LIST_OF_ATTRIBUTES, flag) {
 	if (IS_NOT_ARRAY && IS_UNDEFINED) {
 		let actual_type = getActualType(LIST_OF_ATTRIBUTES[ATTRIBUTE])
 
-		console.error(
-			`The attribute '${ATTRIBUTE}' is '${actual_type}' not a type of 'array'.`
-		)
+		console.error(`The attribute '${ATTRIBUTE}' is '${actual_type}' not a type of 'array'.`)
 		flag = false
 	}
 	return flag
@@ -118,9 +111,7 @@ function validateNonArrayAttribute(ATTRIBUTE, LIST_OF_ATTRIBUTES, TYPE, flag) {
 	if (IS_NOT_TYPE && IS_UNDEFINED) {
 		let actual_type = getActualType(LIST_OF_ATTRIBUTES[ATTRIBUTE])
 
-		console.error(
-			`The attribute '${ATTRIBUTE}' is '${actual_type}' not a type of '${TYPE}'.`
-		)
+		console.error(`The attribute '${ATTRIBUTE}' is '${actual_type}' not a type of '${TYPE}'.`)
 		flag = false
 	}
 	return flag

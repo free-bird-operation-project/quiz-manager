@@ -31,9 +31,7 @@ describe('hasValidTypes', () => {
 	})
 
 	it('should return false for a configuration object with incorrect types', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const config = {
 			id: 123, // should be a string
 			class_name: true, // should be a string
@@ -59,58 +57,42 @@ describe('hasValidTypes', () => {
 	})
 
 	it('should return false when no configuration object is passed', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 
 		const result = hasValidTypes()
 
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			"Make sure the 'config' is not empty."
-		)
+		expect(spyConsoleError).toHaveBeenCalledWith("Make sure the 'config' is not empty.")
 		expect(result).toBe(false)
 		spyConsoleError.mockRestore()
 	})
 
 	it('should return false for an empty configuration object', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const config = {}
 
 		const result = hasValidTypes(config)
 
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			"Make sure the 'config' is not empty."
-		)
+		expect(spyConsoleError).toHaveBeenCalledWith("Make sure the 'config' is not empty.")
 		expect(result).toBe(false)
 		spyConsoleError.mockRestore()
 	})
 
 	it('should return false for null input', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 
 		const result = hasValidTypes(null)
 
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			"Make sure the 'config' is not empty."
-		)
+		expect(spyConsoleError).toHaveBeenCalledWith("Make sure the 'config' is not empty.")
 		expect(result).toBe(false)
 		spyConsoleError.mockRestore()
 	})
 
 	it('should return false for undefined input', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 
 		const result = hasValidTypes(undefined)
 
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			"Make sure the 'config' is not empty."
-		)
+		expect(spyConsoleError).toHaveBeenCalledWith("Make sure the 'config' is not empty.")
 		expect(result).toBe(false)
 		spyConsoleError.mockRestore()
 	})
