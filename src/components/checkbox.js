@@ -44,9 +44,7 @@ class Checkbox {
 		node.dataset.state = new_state
 
 		const icon = node.querySelector('i')
-		console.log('Current: ' + icon.dataset.lucide)
 		const new_icon = this.#changeIcon(icon, new_state)
-		console.log('New: ' + new_icon)
 		icon.dataset.lucide = new_icon
 
 		this.#manageTargets(
