@@ -66,24 +66,17 @@ describe('Checkbox', () => {
 
 			expect(checkbox).toBeDefined()
 			expect(document.body).not.toBeNull()
-			expect(document.body.querySelector('#en-file-checkbox-1').id).toBe(
-				'en-file-checkbox-1'
-			)
+			expect(document.body.querySelector('#en-file-checkbox-1').id).toBe('en-file-checkbox-1')
 			expect(document.body.querySelector('#en-file-checkbox-1').className).toBe(
 				'en-checkboxes checkboxes'
 			)
+			expect(document.body.querySelector('#en-file-checkbox-1').dataset.state).toBe('false')
+			expect(document.body.querySelector('#en-file-checkbox-1').dataset.targetId).toBe('en-qp-1')
+			expect(document.body.querySelector('#en-file-checkbox-1').dataset.groupName).toBe(
+				'en-qp-checkboxes'
+			)
 			expect(
-				document.body.querySelector('#en-file-checkbox-1').dataset.state
-			).toBe('false')
-			expect(
-				document.body.querySelector('#en-file-checkbox-1').dataset.targetId
-			).toBe('en-qp-1')
-			expect(
-				document.body.querySelector('#en-file-checkbox-1').dataset.groupName
-			).toBe('en-qp-checkboxes')
-			expect(
-				document.body.querySelector('#en-file-checkbox-1').querySelector('i')
-					.dataset.lucide
+				document.body.querySelector('#en-file-checkbox-1').querySelector('i').dataset.lucide
 			).toBe('square')
 		})
 
@@ -194,9 +187,7 @@ describe('Checkbox', () => {
 
 			element.click()
 			setLocalStorage(`${config.group_name}-checkboxes`, config.target_id)
-			expect(JSON.parse(localStorage.getItem('en-qp-checkboxes'))).toEqual([
-				'en-qp-1'
-			])
+			expect(JSON.parse(localStorage.getItem('en-qp-checkboxes'))).toEqual(['en-qp-1'])
 
 			//! This one doesn't work currently!
 			// element.click()
