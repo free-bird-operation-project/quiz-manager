@@ -58,7 +58,7 @@ describe('Page', () => {
 				document.body.querySelector('#page-maker').getElementsByClassName('page-header')
 			)
 			headers.forEach((header) => {
-				expect(header.querySelector('#exit-button-page-6')).not.toBeNull()
+				expect(header.querySelector('#button-exit-page-6')).not.toBeNull()
 			})
 		})
 
@@ -87,7 +87,7 @@ describe('Page', () => {
 		it('should create with elements added in config', () => {
 			let button_1 = new Button({
 				icon: 'badge',
-				id: 'add-quiz-3',
+				id: 'add-quiz-1',
 				text: 'Badge',
 				class_name: 'maker-button',
 				events: [
@@ -98,12 +98,12 @@ describe('Page', () => {
 						}
 					}
 				]
-			}).create()
+			})
 
 			let button_2 = new Button({
 				icon: 'cookie',
 				text: 'Cookie',
-				id: 'add-quiz-4',
+				id: 'add-quiz-2',
 				class_name: 'maker-button',
 				events: [
 					{
@@ -113,19 +113,19 @@ describe('Page', () => {
 						}
 					}
 				]
-			}).create()
+			})
 
 			let config_modal = {
 				id: 'modal',
 				title: 'Sample Modal',
 				icon: 'heart',
-				buttons: [button_1, button_2]
+				buttons: [button_1.create(), button_2.create()]
 			}
 
 			let button_3 = new Button({
 				icon: 'anchor',
 				text: 'Anchor',
-				id: 'add-quiz-4',
+				id: 'add-quiz-3',
 				class_name: 'maker-button',
 				events: [
 					{
@@ -140,7 +140,7 @@ describe('Page', () => {
 			let button_4 = new Button({
 				icon: 'grid-2x2-check',
 				text: 'Grid Check',
-				id: 'add-quiz-5',
+				id: 'add-quiz-4',
 				class_name: 'maker-button',
 				events: [
 					{
@@ -170,14 +170,15 @@ describe('Page', () => {
 			expect(document.body.querySelector('#page-maker')).toBeTruthy()
 			expect(
 				document.body.querySelector('#page-maker').getElementsByClassName('.page-header')
-			).toBeTruthy()
+			).not.toBeNull()
 
 			const headers = Array.from(
-				document.body.querySelector('#page-maker').getElementsByClassName('page-header')
+				document.body.querySelector('#page-maker').getElementsByClassName('.page-header')
 			)
+
 			headers.forEach((header) => {
-				expect(header.querySelector('#exit-button-page-4')).toBeNull()
-				expect(header.querySelector('#add-quiz-5-button')).not.toBeNull()
+				expect(header.getElementById('button-exit-page-4')).not.toBeNull()
+				expect(header.getElementById('button-add-quiz-4')).not.toBeNull()
 			})
 
 			expect(
@@ -189,7 +190,7 @@ describe('Page', () => {
 			)
 			bodies.forEach((body) => {
 				expect(body.querySelector('#modal')).not.toBeNull()
-				expect(body.querySelector('#add-quiz-4-button')).not.toBeNull()
+				expect(body.querySelector('#button-add-quiz-3')).not.toBeNull()
 			})
 		})
 	})

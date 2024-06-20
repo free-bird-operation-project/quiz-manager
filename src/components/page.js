@@ -58,7 +58,7 @@ class Page {
 	#createHeader(elements, z_index) {
 		const HEADER = document.createElement('div')
 		setAttributes(HEADER, {
-			class_name: 'page-header'
+			class: 'page-header'
 		})
 
 		if (z_index >= 0 && z_index <= 5) {
@@ -68,7 +68,7 @@ class Page {
 		const exit_config = {
 			icon: 'chevron-left',
 			id: `exit-button-page-${z_index}`,
-			class_name: 'exit',
+			class: 'exit',
 			type: 'rounded-square',
 			events: [
 				{
@@ -93,7 +93,7 @@ class Page {
 	#createBody(elements) {
 		const BODY = document.createElement('div')
 		setAttributes(BODY, {
-			class_name: 'page-body'
+			class: 'page-body'
 		})
 
 		elements.forEach((element) => {
