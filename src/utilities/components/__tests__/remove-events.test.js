@@ -25,9 +25,7 @@ describe('removeEvents', () => {
 	})
 
 	it('should return false when events are not provided', () => {
-		const spyConsoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {})
+		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const element = document.createElement('div')
 
 		const result = removeEvents(element, null)
