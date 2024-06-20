@@ -18,7 +18,7 @@ function hasValidAttributes(component, config) {
 		{ checkbox: ['id', 'class_name', 'state', 'target_id', 'group_name'] },
 		{ modal: ['id', 'title', 'icon', 'buttons'] },
 		{ textarea: ['id', 'class_name', 'placeholder', 'text', 'readonly'] },
-		{ page: ['elements', 'z_index'] }
+		{ page: ['elements', 'z_index', 'id'] }
 	]
 
 	const VALID_COMPONENTS = LIST_OF_VALID_ATTRIBUTES.find((list_object) =>
