@@ -20,7 +20,7 @@ class Page {
 		const PAGE = document.createElement('div')
 		setAttributes(PAGE, {
 			id: `page-${id}`,
-			class_name: 'page',
+			class: 'page',
 			style: `z-index: ${z_index}`
 		})
 		const HEADER = this.#createHeader(header_elements, z_index)
@@ -28,6 +28,7 @@ class Page {
 
 		PAGE.appendChild(HEADER)
 		PAGE.appendChild(BODY)
+
 		return PAGE
 	}
 
@@ -67,8 +68,8 @@ class Page {
 
 		const exit_config = {
 			icon: 'chevron-left',
-			id: `exit-button-page-${z_index}`,
-			class: 'exit',
+			id: `exit-page-${z_index}`,
+			class_name: 'exit',
 			type: 'rounded-square',
 			events: [
 				{
