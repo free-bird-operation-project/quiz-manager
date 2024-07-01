@@ -62,25 +62,23 @@ class Page {
 			class: 'page-header'
 		})
 
-		if (z_index >= 0 && z_index <= 5) {
-			return HEADER
-		}
+		if (z_index > 5) {
+			const exit_config = {
+				icon: 'chevron-left',
+				id: `exit-page-${z_index}`,
+				class_name: 'exit',
+				type: 'rounded-square',
+				events: [
+					{
+						event_name: 'click',
+						func: this.remove.bind(this)
+					}
+				]
+			}
+			const exit_button = new Button(exit_config).create()
 
-		const exit_config = {
-			icon: 'chevron-left',
-			id: `exit-page-${z_index}`,
-			class_name: 'exit',
-			type: 'rounded-square',
-			events: [
-				{
-					event_name: 'click',
-					func: this.remove.bind(this)
-				}
-			]
+			HEADER.appendChild(exit_button)
 		}
-		const exit_button = new Button(exit_config).create()
-
-		HEADER.appendChild(exit_button)
 
 		if (elements) {
 			elements.forEach((element) => {
