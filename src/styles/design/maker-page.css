@@ -1,0 +1,27 @@
+#page-maker .page-header {
+	div:last-child {
+		background-color: var(--black-2);
+		border-radius: 0px;
+		border-bottom-left-radius: 12px;
+	}
+
+	div:last-child:hover {
+		svg {
+			scale: 1.2;
+			rotate: 10deg;
+		}
+	}
+}
+
+#button-add-quiz-form {
+	border-radius: 12px;
+	background: var(--yellow-to-purple);
+	background-size: 200% 100%;
+	position: fixed;
+	bottom: 60px;
+	right: 12px;
+
+	svg {
+		stroke: var(--black-0);
+	}
+}
