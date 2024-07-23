@@ -1,0 +1,6 @@
+#page-maker .page-header {
+	div:first-child {
+		flex-grow: 1;
+		padding-left: 16px;
+	}
+}
