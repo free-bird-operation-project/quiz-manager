@@ -11,12 +11,21 @@ class Container {
 	}
 
 	create() {
-		const { id, class_name } = this.#config
+		const { id, class_name, elements, text } = this.#config
 		const CONTAINER = document.createElement('div')
 		setAttributes(CONTAINER, {
 			id: `${id}`,
 			class: `${class_name}`
 		})
+
+		if (elements) {
+			this.#appendElements(elements, CONTAINER)
+		}
+
+		if (text) {
+			this.#appendText(text, CONTAINER)
+		}
+
 		return CONTAINER
 	}
 
@@ -30,6 +39,16 @@ class Container {
 
 		CONTAINER.remove()
 		CONTAINER = null
+	}
+
+	#appendElements(elements, container) {
+		elements.forEach((element) => {
+			container.appendChild(element)
+		})
+	}
+
+	#appendText(text, container) {
+		container.textContent = text
 	}
 }
 
