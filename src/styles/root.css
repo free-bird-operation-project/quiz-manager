@@ -1,7 +1,7 @@
 :root {
-  /*? Default */
-  --background-color: var(--black-0);
-  --text-color: var(--white-0);
+	/*? Default */
+	--background-color: var(--black-0);
+	--text-color: var(--white-0);
 
 	/* Colors */
 	--black-0: #0a0a0a;
@@ -29,15 +29,15 @@
 	--button-small: 32px;
 	--button-regular: 48px;
 
-  /* Margin and Padding Sizes */
-  --mp-xxsmall : 4px;
-  --mp-small: 8px;
-  --mp-regular : 16px;
-  --mp-large : 32px;
-  --mp-xlarge : 64px;
+	/* Margin and Padding Sizes */
+	--mp-xxsmall: 4px;
+	--mp-small: 8px;
+	--mp-regular: 16px;
+	--mp-large: 32px;
+	--mp-xlarge: 64px;
 
-  /* Cautionary */
-  --warning-color: #e10617;
-  --caution-color: #fdaa15;
-  --info-color: #007588;
+	/* Cautionary */
+	--warning-color: #e10617;
+	--caution-color: #fdaa15;
+	--info-color: #007588;
 }
