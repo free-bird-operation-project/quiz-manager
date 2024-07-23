@@ -22,6 +22,7 @@
 	"author": "Free Bird Operation Project",
 	"license": "MIT",
 	"dependencies": {
+		"dexie": "^4.0.8",
 		"eslint": "^9.2.0",
 		"lucide": "^0.390.0",
 		"vercel": "^34.1.9",
