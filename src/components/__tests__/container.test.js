@@ -2,6 +2,7 @@
 
 import { JSDOM } from 'jsdom'
 import { Container } from '@components/container'
+import { Button } from '@components/button'
 
 const dom = new JSDOM('<!DOCTYPE html>')
 global.window = dom.window
@@ -32,20 +33,49 @@ describe('Container', () => {
 		expect(container.className).toBe('container-class')
 	})
 
-	it('should append text or any external element to the container', () => {
+	it('should append plain text to the container', () => {
 		const config = {
 			id: 'test-container',
-			class_name: 'container-class'
+			class_name: 'container-class',
+			text: 'Hello, world!'
 		}
 
 		const containerInstance = new Container(config)
 		const containerElement = containerInstance.create()
 		document.body.appendChild(containerElement)
 
-		const textNode = document.createTextNode('Hello, world!')
-		containerElement.appendChild(textNode)
-
 		expect(containerElement.textContent).toBe('Hello, world!')
+	})
+
+	it('should append any external element to the container', () => {
+		const config = {
+			icon: 'plus',
+			id: 'add-quiz',
+			class_name: 'maker-button',
+			type: 'rounded-square',
+			events: [
+				{
+					event_name: 'click',
+					func: () => {
+						console.log('It worked!')
+					}
+				}
+			]
+		}
+
+		const button = new Button(config).create()
+
+		const another_config = {
+			id: 'test-container',
+			class_name: 'container-class',
+			elements: [button]
+		}
+
+		const containerInstance = new Container(another_config)
+		const containerElement = containerInstance.create()
+		document.body.appendChild(containerElement)
+
+		expect(containerElement.querySelector('#button-add-quiz')).not.toBeNull()
 	})
 
 	it('should remove the container when the remove method is called', () => {
