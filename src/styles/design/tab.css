@@ -1,0 +1,25 @@
+.tab {
+	display: flex;
+	background-color: var(--black-4);
+	border-top-right-radius: 24px;
+	border-top-left-radius: 24px;
+	z-index: 3;
+
+	div {
+		cursor: pointer;
+		border-top-right-radius: 24px;
+		border-top-left-radius: 24px;
+	}
+
+	.tab-active {
+		background-color: var(--black-5);
+	}
+
+	div:hover {
+		svg {
+			transition: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+			scale: 1.2;
+			rotate: 10deg;
+		}
+	}
+}
