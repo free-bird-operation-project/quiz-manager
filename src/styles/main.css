@@ -1,0 +1,15 @@
+/* Layout */
+@import url(./layout/body.css);
+@import url(./layout/page.css);
+@import url(./layout/tab.css);
+@import url(./layout/buttons.css);
+@import url(./layout/quiz-form.css);
+@import url(./layout/maker-page.css);
+
+/* Design */
+@import url(./design/body.css);
+@import url(./design/page.css);
+@import url(./design/quiz-form.css);
+@import url(./design/tab.css);
+@import url(./design/buttons.css);
+@import url(./design/maker-page.css);
