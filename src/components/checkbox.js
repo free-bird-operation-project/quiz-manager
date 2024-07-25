@@ -87,9 +87,12 @@ class Checkbox {
 			'class': `${class_name} checkboxes`.trim(),
 			'data-state': 'false',
 			'data-group-name': `${group_name}-checkboxes`,
-			'data-target-id': target_id,
-			'hidden': hidden
+			'data-target-id': target_id
 		})
+
+		if (hidden) {
+			TEXTAREA.setAttribute('hidden', true)
+		}
 
 		node.appendChild(icon)
 
