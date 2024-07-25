@@ -49,13 +49,17 @@ class Textarea {
 		setAttributes(TEXTAREA, {
 			id: `textarea-${id}`,
 			class: `textarea-${class_name} textarea`.trim(),
-			placeholder: placeholder,
-			hidden: hidden
+			placeholder: placeholder
 		})
 
 		if (readonly) {
 			TEXTAREA.setAttribute('readonly', true)
 		}
+
+		if (hidden) {
+			TEXTAREA.setAttribute('hidden', true)
+		}
+
 		TEXTAREA.textContent = text
 
 		return TEXTAREA
