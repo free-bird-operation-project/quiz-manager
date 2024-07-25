@@ -15,9 +15,9 @@ function hasValidAttributes(component, config) {
 		{ button: ['class_name', 'id', 'text', 'events', 'icon', 'type'] },
 		{ tab: ['buttons'] },
 		{ snackbar: ['message'] },
-		{ checkbox: ['id', 'class_name', 'state', 'target_id', 'group_name'] },
+		{ checkbox: ['id', 'class_name', 'state', 'target_id', 'group_name', 'hidden'] },
 		{ modal: ['id', 'title', 'icon', 'buttons'] },
-		{ textarea: ['id', 'class_name', 'placeholder', 'text', 'readonly'] },
+		{ textarea: ['id', 'class_name', 'placeholder', 'text', 'readonly', 'hidden'] },
 		{ page: ['elements', 'z_index', 'id'] },
 		{ container: ['id', 'class_name', 'elements', 'text'] }
 	]
