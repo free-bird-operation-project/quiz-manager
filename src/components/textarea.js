@@ -11,14 +11,8 @@ class Textarea {
 	}
 
 	create() {
-		const { id, class_name, placeholder, text, readonly } = this.#config
-		const TEXTAREA = this.#createContainer(
-			id,
-			class_name,
-			placeholder,
-			text,
-			readonly
-		)
+		const { id, class_name, placeholder, text, readonly, hidden } = this.#config
+		const TEXTAREA = this.#createContainer(id, class_name, placeholder, text, readonly, hidden)
 
 		return TEXTAREA
 	}
@@ -48,14 +42,15 @@ class Textarea {
 		TEXTAREA.removeAttribute('readonly')
 	}
 
-	#createContainer(id, class_name, placeholder, text, readonly) {
+	#createContainer(id, class_name, placeholder, text, readonly, hidden) {
 		if (!id) return
 
 		const TEXTAREA = document.createElement('textarea')
 		setAttributes(TEXTAREA, {
 			id: `textarea-${id}`,
 			class: `textarea-${class_name} textarea`.trim(),
-			placeholder: placeholder
+			placeholder: placeholder,
+			hidden: hidden
 		})
 
 		if (readonly) {

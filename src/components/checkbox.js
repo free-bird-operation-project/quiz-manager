@@ -13,11 +13,11 @@ class Checkbox {
 	}
 
 	create() {
-		const { id, class_name, target_id, group_name } = this.#config
+		const { id, class_name, target_id, group_name, hidden } = this.#config
 
 		this.#removeLocalStorageCheckboxesItems()
 
-		const node = this.#createNode(id, class_name, target_id, group_name)
+		const node = this.#createNode(id, class_name, target_id, group_name, hidden)
 		const CHECKBOX = this.#setEvents(node)
 
 		return CHECKBOX
@@ -78,7 +78,7 @@ class Checkbox {
 		return icon
 	}
 
-	#createNode(id, class_name, target_id, group_name) {
+	#createNode(id, class_name, target_id, group_name, hidden) {
 		const node = document.createElement('div')
 		const icon = this.#createIcon()
 
@@ -87,7 +87,8 @@ class Checkbox {
 			'class': `${class_name} checkboxes`.trim(),
 			'data-state': 'false',
 			'data-group-name': `${group_name}-checkboxes`,
-			'data-target-id': target_id
+			'data-target-id': target_id,
+			'hidden': hidden
 		})
 
 		node.appendChild(icon)
