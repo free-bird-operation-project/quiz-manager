@@ -12,40 +12,44 @@ describe('Button', () => {
 		document.body.innerHTML = null
 	})
 
-	describe('create()', () => {
-		describe('should create a button with a valid configuration', () => {
-			it('should create a rounded-square type button', () => {
-				const mock_log = jest.spyOn(console, 'log').mockImplementation(() => {})
+	describe('Button', () => {
+		beforeEach(() => {
+			document.body.innerHTML = null
+			jest.spyOn(console, 'log').mockImplementation(() => {})
+		})
 
-				const config = {
-					icon: 'plus',
-					id: 'add-quiz',
-					class_name: 'maker-button',
-					type: 'rounded-square',
-					events: [
-						{
-							event_name: 'click',
-							func: () => {
-								console.log('It worked!')
+		describe('create()', () => {
+			describe('should create a button with a valid configuration', () => {
+				it('should create a rounded-square type button', () => {
+					const config = {
+						icon: 'plus',
+						id: 'add-quiz',
+						class_name: 'maker-button',
+						type: 'rounded-square',
+						events: [
+							{
+								event_name: 'click',
+								func: () => {
+									console.log('It worked!')
+								}
 							}
-						}
-					]
-				}
+						]
+					}
 
-				const button = new Button(config)
-				const button_node = button.create()
-				document.body.appendChild(button_node)
+					const button = new Button(config)
+					const button_node = button.create()
+					document.body.appendChild(button_node)
 
-				const element = document.getElementById('button-add-quiz')
-				element.click()
+					const element = document.getElementById('button-add-quiz')
+					element.click()
 
-				expect(document.body.innerHTML).not.toHaveLength(0)
-				expect(button).toBeDefined()
-				expect(mock_log).toHaveBeenCalledWith('It worked!')
-				expect(element.id).toBe('button-add-quiz')
-				expect(element.className).toBe('maker-button button rounded-square-button')
-				expect(element.querySelector('[data-lucide="plus"]')).not.toBeNull()
-			})
+					expect(document.body.innerHTML).not.toHaveLength(0)
+					expect(button).toBeDefined()
+					expect(mock_log).toHaveBeenCalledWith('It worked!')
+					expect(element.id).toBe('button-add-quiz')
+					expect(element.className).toBe('maker-button button rounded-square-button')
+					expect(element.querySelector('[data-lucide="plus"]')).not.toBeNull()
+				})
 
 			describe('should create a slab type button', () => {
 				it('should create a button with icon and text', () => {
