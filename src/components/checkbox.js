@@ -61,9 +61,12 @@ class Checkbox {
 	}
 
 	#changeIcon(icon, state) {
-		return state === 'true'
-			? (icon.dataset.lucide = 'square-check')
-			: (icon.dataset.lucide = 'square')
+		if (state === 'true') {
+			icon.dataset.lucide = 'square-check'
+		} else {
+			icon.dataset.lucide = 'square'
+		}
+		return icon.dataset.lucide
 	}
 
 	#createIcon() {
