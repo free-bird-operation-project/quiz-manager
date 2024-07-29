@@ -1,3 +1,5 @@
+'use strict'
+
 import { JSDOM } from 'jsdom'
 import { Checkbox } from '@components/checkbox'
 
@@ -41,8 +43,13 @@ describe('Checkbox', () => {
 		window.localStorage.setItem(id, JSON.stringify([data]))
 	}
 
-	const removeLocalStorage = (key) => {
-		window.localStorage.removeItem(key)
+	const removeLocalStorage = (id, data) => {
+		let storedData = JSON.parse(window.localStorage.getItem(id)) || []
+		const index = storedData.indexOf(data)
+		if (index > -1) {
+			storedData.splice(index, 1)
+		}
+		window.localStorage.setItem(id, JSON.stringify(storedData))
 	}
 
 	beforeEach(() => {
@@ -169,7 +176,6 @@ describe('Checkbox', () => {
 			expect(icon.dataset.lucide).toBe('square')
 		})
 
-		// TODO: In the browser, managing localStorage works, but in tests, it is quite tricky! This is still in process! Try to research more about this.
 		it('should manage target id in localStorage when state changes', () => {
 			const config = {
 				id: 'en-file-checkbox-1',
@@ -187,10 +193,9 @@ describe('Checkbox', () => {
 			setLocalStorage(`${config.group_name}-checkboxes`, config.target_id)
 			expect(JSON.parse(localStorage.getItem('en-qp-checkboxes'))).toEqual(['en-qp-1'])
 
-			//! This one doesn't work currently!
-			// element.click()
-			// removeLocalStorage(['en-qp-1'])
-			// expect(JSON.parse(localStorage.getItem('en-qp-checkboxes'))).toEqual([])
+			element.click()
+			removeLocalStorage(`${config.group_name}-checkboxes`, config.target_id)
+			expect(JSON.parse(localStorage.getItem('en-qp-checkboxes'))).toEqual([])
 		})
 	})
 
