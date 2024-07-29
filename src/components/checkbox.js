@@ -92,7 +92,7 @@ class Checkbox {
 		})
 
 		if (hidden) {
-			TEXTAREA.setAttribute('hidden', true)
+			node.setAttribute('hidden', true)
 		}
 
 		node.appendChild(icon)
