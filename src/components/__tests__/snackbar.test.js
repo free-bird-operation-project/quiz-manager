@@ -1,5 +1,3 @@
-'use strict'
-
 import { JSDOM } from 'jsdom'
 import { Snackbar } from '@components/snackbar'
 
