@@ -1,5 +1,3 @@
-'use strict'
-
 import { JSDOM } from 'jsdom'
 import { Container } from '@components/container'
 import { Button } from '@components/button'

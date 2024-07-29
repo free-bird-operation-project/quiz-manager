@@ -1,5 +1,3 @@
-'use strict'
-
 import { isConfigVerified } from '@utilities/config/config-verifier'
 import { setEvents } from '@utilities/components/set-events'
 import { setAttributes } from '@utilities/components/set-attributes'
