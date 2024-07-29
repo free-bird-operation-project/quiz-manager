@@ -46,7 +46,7 @@ class Textarea {
 		const TEXTAREA = document.createElement('textarea')
 		setAttributes(TEXTAREA, {
 			id: `textarea-${id}`,
-			class: `textarea-${class_name} textarea`.trim(),
+			class: `textarea-${class_name} textarea`,
 			placeholder: placeholder
 		})
 
