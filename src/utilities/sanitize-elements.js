@@ -1,4 +1,3 @@
-
 /**
  * Sanitizes the input `element` based on the specified `type`.
  * Validates that the `element` is of the correct type and that `type` is a valid string.
