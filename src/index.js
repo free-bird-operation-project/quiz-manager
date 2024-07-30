@@ -1,58 +1,28 @@
-const button = document.getElementById('learn-more')
+'use strict'
 
-button.addEventListener('click', () => {
-	window.location.href =
-		'https://github.com/free-bird-operation-project/quiz-manager'
-})
+import { App } from './app'
 
-const cursor = document.querySelector('.cursor')
+/**
+ * Initializes the app by appending it to the main element in the document.
+ *
+ * @param {Element} App - The App element to be appended.
+ * @returns {void} - No return value.
+ */
+function initializeApp(App) {
+	const main = document.querySelector('main')
 
-document.addEventListener('mousemove', (e) => {
-	cursor.setAttribute(
-		'style',
-		'top: ' + (e.pageY - 10) + 'px; left: ' + (e.pageX - 10) + 'px;'
-	)
-})
+	try {
+		if (!App) {
+			throw new Error('No app to display.')
+		}
 
-document.addEventListener('click', () => {
-	cursor.classList.add('expand')
-
-	setTimeout(() => {
-		cursor.classList.remove('expand')
-	}, 500)
-})
-
-const emoji = document.getElementById('emoji')
-const emojiList = [
-	'😀',
-	'😉',
-	'🥰',
-	'🤗',
-	'🥱',
-	'🤠',
-	'🧐',
-	'😁',
-	'😃',
-	'😎',
-	'😊',
-	'😍',
-	'🤩',
-	'🙂',
-	'😯',
-	'🥹',
-	'🫣',
-	'🤓'
-]
-
-function changeEmoji() {
-	const randomIndex = Math.floor(Math.random() * emojiList.length)
-	const newEmoji = emojiList[randomIndex]
-
-	emoji.style.transform = 'scale(0.1)'
-	setTimeout(() => {
-		emoji.textContent = newEmoji
-		emoji.style.transform = 'scale(1)'
-	}, 100)
+		main.appendChild(App)
+	} catch (error) {
+		console.error(`Error: ${error.message}`)
+	}
 }
-changeEmoji()
-setInterval(changeEmoji, 3000)
+
+initializeApp(new App().create())
+
+//? Uncomment the next line to trigger the test
+// export { initializeApp }
