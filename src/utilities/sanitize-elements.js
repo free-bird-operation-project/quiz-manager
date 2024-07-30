@@ -1,4 +1,3 @@
-'use strict'
 
 /**
  * Sanitizes the input `element` based on the specified `type`.
