@@ -64,12 +64,14 @@ class ConfigVerifier {
 	 */
 	#isComponentName() {
 		if (!this.componentName) {
-			console.error('Invalid input: componentName is required.')
+			console.error('Invalid input: componentName is required and must be a non-empty string.')
 			return false
 		}
 
 		if (typeof this.componentName !== 'string') {
-			console.error(`Invalid input: componentName is not a string but a ${this.componentName}`)
+			console.error(
+				`Invalid input: componentName is not a string but a ${typeof this.componentName}`
+			)
 			return false
 		}
 
@@ -83,12 +85,12 @@ class ConfigVerifier {
 	 */
 	#isConfig() {
 		if (!this.config || this.config === undefined || Object.keys(this.config).length === 0) {
-			console.error('Invalid input: config is required and must not empty.')
+			console.error('Invalid input: config is required and must not be empty.')
 			return false
 		}
 
 		if (typeof this.config !== 'object' || Array.isArray(this.config)) {
-			console.error(`Invalid input: config is not an object but a ${this.config}`)
+			console.error(`Invalid input: config is not an object but a ${typeof this.config}`)
 			return false
 		}
 
@@ -170,6 +172,7 @@ class ConfigVerifier {
 		Object.entries(this.#validAttributesTypesList).forEach(([type, attributes]) => {
 			attributes.forEach((attribute) => {
 				const value = this.config[attribute]
+
 				if (value !== undefined) {
 					typeCheckFunctions[type](attribute, value)
 				}
