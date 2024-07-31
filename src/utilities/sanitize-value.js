@@ -13,25 +13,41 @@
  * sanitizeValue(123, 'number') // returns 123
  * sanitizeValue([], 'array') // returns []
  * sanitizeValue({}, 'object') // returns {}
+ * sanitizeValue(false, 'boolean') // returns false
  * sanitizeValue(document.createElement('div'), 'HTMLElement') // returns <div></div>
  * sanitizeValue(null, 'string') // returns null
  */
 function sanitizeValue(value, type) {
 	let flag = false
 	const conditionList = [
-		[value === undefined || value === null, 'Invalid input: value is required.'],
-		[!type, 'Invalid input: type is required.'],
-		[
-			!['boolean', 'string', 'object', 'number', 'bigint', 'symbol', 'function'].includes(
-				typeof value
-			) &&
+		{
+			condition: value === undefined || value === null,
+			message: 'Invalid input: value is required.'
+		},
+		{
+			condition: !type,
+			message: 'Invalid input: type is required.'
+		},
+		{
+			condition:
 				!Array.isArray(value) &&
-				!(value instanceof HTMLElement),
-			'Invalid input: value must be of a valid type (boolean, string, array, object, number, HTMLElement, bigint, symbol, or function).'
-		],
-		[typeof type !== 'string', 'Invalid input: type must be a string.'],
-		[
-			!(
+				!(value instanceof HTMLElement) &&
+				typeof value !== 'bigint' &&
+				typeof value !== 'boolean' &&
+				typeof value !== 'function' &&
+				typeof value !== 'number' &&
+				typeof value !== 'object' &&
+				typeof value !== 'string' &&
+				typeof value !== 'symbol',
+			message:
+				'Invalid input: Value must be of a valid type (boolean, string, array, object, number, HTMLElement, bigint, symbol, or function).'
+		},
+		{
+			condition: typeof type !== 'string',
+			message: 'Invalid input: type must be a string.'
+		},
+		{
+			condition: !(
 				(type === 'array' && Array.isArray(value)) ||
 				(type === 'object' &&
 					value !== null &&
@@ -42,13 +58,13 @@ function sanitizeValue(value, type) {
 				(type === 'null' && value === null) ||
 				type === typeof value
 			),
-			`Notice: The value and type are not equal. Value is of type ${typeof value}, while type is ${type}.`
-		]
+			message: `Notice: The value and type are not equal. Value is of type ${typeof value}, while type is ${type}.`
+		}
 	]
 
 	conditionList.forEach((condition) => {
-		if (condition[0]) {
-			console.error(condition[1])
+		if (condition.condition) {
+			console.error(condition.message)
 			flag = true
 		}
 	})
