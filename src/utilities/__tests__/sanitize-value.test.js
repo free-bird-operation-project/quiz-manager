@@ -33,7 +33,7 @@ describe('sanitizeValue', () => {
 	it('should return null and log an error when value is of an invalid type', () => {
 		expect(sanitizeValue(new Date(), 'string')).toBeNull()
 		expect(console.error).toHaveBeenCalledWith(
-			'Notice: The value and type are not equal. value is of type object, while type is string.'
+			'Notice: The value and type are not equal. Value is of type object, while type is string.'
 		)
 	})
 
@@ -45,7 +45,7 @@ describe('sanitizeValue', () => {
 	it('should return null and log an error when value does not match the specified type', () => {
 		expect(sanitizeValue('test', 'number')).toBeNull()
 		expect(console.error).toHaveBeenCalledWith(
-			'Notice: The value and type are not equal. value is of type string, while type is number.'
+			'Notice: The value and type are not equal. Value is of type string, while type is number.'
 		)
 	})
 

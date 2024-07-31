@@ -10,13 +10,15 @@
  */
 function sanitizeValue(value, type) {
 	let flag = false
-	const conditions = [
+	const conditionList = [
 		[value === undefined || value === null, 'Invalid input: value is required.'],
 		[!type, 'Invalid input: type is required.'],
 		[
-			!['boolean', 'string', 'object', 'number', 'bigint', 'symbol', 'function'].includes(typeof value) &&
-			!Array.isArray(value) &&
-			!(value instanceof HTMLElement),
+			!['boolean', 'string', 'object', 'number', 'bigint', 'symbol', 'function'].includes(
+				typeof value
+			) &&
+				!Array.isArray(value) &&
+				!(value instanceof HTMLElement),
 			'Invalid input: value must be of a valid type (boolean, string, array, object, number, HTMLElement, bigint, symbol, or function).'
 		],
 		[typeof type !== 'string', 'Invalid input: type must be a string.'],
@@ -32,13 +34,13 @@ function sanitizeValue(value, type) {
 				(type === 'null' && value === null) ||
 				type === typeof value
 			),
-			`Notice: The value and type are not equal. value is of type ${typeof value}, while type is ${type}.`
+			`Notice: The value and type are not equal. Value is of type ${typeof value}, while type is ${type}.`
 		]
-	];
+	]
 
 	conditionList.forEach((condition) => {
-		if (condition.condition) {
-			console.error(condition.message)
+		if (condition[0]) {
+			console.error(condition[1])
 			flag = true
 		}
 	})
