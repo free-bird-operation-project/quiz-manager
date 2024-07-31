@@ -33,7 +33,9 @@ module.exports = merge(commonConfig, {
 			}),
 			new TerserPlugin({
 				terserOptions: {
-					compress: {}
+					compress: {
+						drop_console: true
+					}
 				}
 			})
 		]
