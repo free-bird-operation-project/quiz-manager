@@ -1,0 +1,55 @@
+/**
+ * Sanitizes the input `value` based on the specified `type`.
+ * Validates that the `value` is of the correct type and that `type` is a valid string.
+ * If any validation fails, logs an error message and returns `null`.
+ *
+ * @param {*} value - The value to be validated. Can be of various types including boolean, string, array, object, number, HTMLElement, bigint, symbol, or function.
+ * @param {string} type - The expected type of the `value`. Should be a string representing the type (e.g., "boolean", "string", "array", "object", "number", "HTMLElement", "bigint", "symbol", "function", or "null").
+ *
+ * @returns {*} The original `value` if all validations pass; otherwise, `null`.
+ */
+function sanitizeValue(value, type) {
+	let flag = false
+	const conditionList = [
+		[value === undefined || value === null, 'Invalid input: value is required.'],
+		[!type, 'Invalid input: type is required.'],
+		[
+			!['boolean', 'string', 'object', 'number', 'bigint', 'symbol', 'function'].includes(
+				typeof value
+			) &&
+				!Array.isArray(value) &&
+				!(value instanceof HTMLElement),
+			'Invalid input: value must be of a valid type (boolean, string, array, object, number, HTMLElement, bigint, symbol, or function).'
+		],
+		[typeof type !== 'string', 'Invalid input: type must be a string.'],
+		[
+			!(
+				(type === 'array' && Array.isArray(value)) ||
+				(type === 'object' &&
+					value !== null &&
+					typeof value === 'object' &&
+					!Array.isArray(value) &&
+					!(value instanceof HTMLElement)) ||
+				(type === 'HTMLElement' && value instanceof HTMLElement) ||
+				(type === 'null' && value === null) ||
+				type === typeof value
+			),
+			`Notice: The value and type are not equal. Value is of type ${typeof value}, while type is ${type}.`
+		]
+	]
+
+	conditionList.forEach((condition) => {
+		if (condition[0]) {
+			console.error(condition[1])
+			flag = true
+		}
+	})
+
+	if (flag) {
+		return null
+	}
+
+	return value
+}
+
+export { sanitizeValue }
