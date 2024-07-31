@@ -7,6 +7,11 @@
  * @param {string} type - The expected type of the `value`. Should be a string representing the type (e.g., "boolean", "string", "array", "object", "number", "HTMLElement", "bigint", "symbol", "function", or "null").
  *
  * @returns {*} The original `value` if all validations pass; otherwise, `null`.
+ *
+ * @example
+ * sanitizeValue('test', 'string') // returns 'test'
+ * sanitizeValue(123, 'number') // returns 123
+ * sanitizeValue(null, 'string') // returns null
  */
 function sanitizeValue(value, type) {
 	let flag = false
