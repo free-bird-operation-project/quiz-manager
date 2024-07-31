@@ -1,5 +1,5 @@
 import { MainPage } from '@pages/main-page'
-import { sanitizeElements } from '@utilities/sanitize-elements'
+import { sanitizeValue } from '@utilities/sanitize-value'
 
 /**
  * Class representing an App.
@@ -47,7 +47,7 @@ class App {
 			}
 
 			this.elements.forEach((element) => {
-				temporaryElements.push(sanitizeElements(element, 'HTMLElement'))
+				temporaryElements.push(sanitizeValue(element, 'HTMLElement'))
 			})
 
 			return temporaryElements
