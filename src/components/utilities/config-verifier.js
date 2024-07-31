@@ -104,7 +104,7 @@ class ConfigVerifier {
 	 */
 	#hasValidAttributes() {
 		const validAttributesEntry = this.#validAttributesList.find((attributeList) =>
-			attributeList.hasOwnProperty(this.componentName)
+			Object.hasOwn(attributeList, this.componentName)
 		)
 
 		if (!validAttributesEntry) {
