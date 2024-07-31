@@ -11,6 +11,9 @@
  * @example
  * sanitizeValue('test', 'string') // returns 'test'
  * sanitizeValue(123, 'number') // returns 123
+ * sanitizeValue([], 'array') // returns []
+ * sanitizeValue({}, 'object') // returns {}
+ * sanitizeValue(document.createElement('div'), 'HTMLElement') // returns <div></div>
  * sanitizeValue(null, 'string') // returns null
  */
 function sanitizeValue(value, type) {
