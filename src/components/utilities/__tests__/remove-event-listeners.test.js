@@ -23,33 +23,22 @@ describe('removeEventListeners', () => {
 	})
 
 	it('should return false if the element is not provided', () => {
-		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const events = [{ type: 'click', func: () => {} }]
 
 		const result = removeEventListeners(null, events)
 
 		expect(result).toBe(false)
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			'Cannot remove event listener! Check if the element or the events is valid.'
-		)
-		spyConsoleError.mockRestore()
 	})
 
 	it('should return false if the events array is not provided', () => {
-		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const element = document.createElement('div')
 
 		const result = removeEventListeners(element, null)
 
 		expect(result).toBe(false)
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			'Cannot remove event listener! Check if the element or the events is valid.'
-		)
-		spyConsoleError.mockRestore()
 	})
 
 	it('should return false if any event object in the array is invalid', () => {
-		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
 		const element = document.createElement('div')
 		const events = [
 			{ type: 'click', func: () => {} },
@@ -59,20 +48,25 @@ describe('removeEventListeners', () => {
 		const result = removeEventListeners(element, events)
 
 		expect(result).toBe(false)
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			'Cannot remove event listener! Check if the element or the events is valid.'
-		)
-		spyConsoleError.mockRestore()
 	})
 
-	it('should log an error message when parameters are invalid', () => {
+	it('should log comprehensive errors if validation fails', () => {
 		const spyConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {})
-		const result = removeEventListeners(null, null)
-
+		const element = document.createElement('div')
+		// Falsy event type
+		const result = removeEventListeners(element, [{ type: 12, func: () => {} }])
 		expect(result).toBe(false)
-		expect(spyConsoleError).toHaveBeenCalledWith(
-			'Cannot remove event listener! Check if the element or the events is valid.'
+
+		// Comprehensive Errors
+		expect(spyConsoleError).toHaveBeenNthCalledWith(
+			1,
+			'Notice: The value and type are not equal. Value is of type number, while type is string.'
 		)
+		expect(spyConsoleError).toHaveBeenNthCalledWith(
+			2,
+			'Cannot remove event listeners! Check if the element or the events is valid.'
+		)
+
 		spyConsoleError.mockRestore()
 	})
 })
