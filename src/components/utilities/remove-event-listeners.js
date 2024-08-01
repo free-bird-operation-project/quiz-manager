@@ -9,7 +9,7 @@ import { sanitizeValue } from '@utilities/sanitize-value'
  */
 function removeEventListeners(element, events) {
 	if (!validateParameters(element, events)) {
-		console.error('Cannot remove event listener! Check if the element or the events is valid.')
+		console.error('Cannot remove event listeners! Check if the element or the events is valid.')
 		return false
 	}
 
