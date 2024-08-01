@@ -9,7 +9,7 @@ import { sanitizeValue } from '@utilities/sanitize-value'
  */
 function addEventListeners(element, events) {
 	if (!validateParameters(element, events)) {
-		console.error('Cannot add event listeners! Check if the element or the events is valid.')
+		console.error('Cannot add event listeners! Invalid element or events parameter.')
 		return false
 	}
 
