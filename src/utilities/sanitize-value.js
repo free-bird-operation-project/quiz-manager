@@ -25,26 +25,22 @@ function sanitizeValue(value, type) {
 			message: 'Invalid input: value is required.'
 		},
 		{
+			condition: typeof type !== 'string',
+			message: 'Invalid input: type must be a string.'
+		},
+		{
 			condition: !type,
 			message: 'Invalid input: type is required.'
 		},
 		{
 			condition:
+				!['boolean', 'string', 'object', 'number', 'bigint', 'symbol', 'function'].includes(
+					typeof value
+				) &&
 				!Array.isArray(value) &&
-				!(value instanceof HTMLElement) &&
-				typeof value !== 'bigint' &&
-				typeof value !== 'boolean' &&
-				typeof value !== 'function' &&
-				typeof value !== 'number' &&
-				typeof value !== 'object' &&
-				typeof value !== 'string' &&
-				typeof value !== 'symbol',
+				!(value instanceof HTMLElement),
 			message:
-				'Invalid input: Value must be of a valid type (boolean, string, array, object, number, HTMLElement, bigint, symbol, or function).'
-		},
-		{
-			condition: typeof type !== 'string',
-			message: 'Invalid input: type must be a string.'
+				'Invalid input: value must be of a valid type (boolean, string, array, object, number, HTMLElement, bigint, symbol, or function).'
 		},
 		{
 			condition: !(
