@@ -6,10 +6,10 @@ class ConfigVerifier {
 		{ button: ['className', 'events', 'icon', 'id', 'text', 'type'] },
 		{ checkbox: ['className', 'groupName', 'hidden', 'id', 'state', 'targetId'] },
 		{ container: ['className', 'elements', 'id', 'text'] },
-		{ modal: ['buttons', 'icon', 'id', 'title'] },
+		{ modal: ['buttonInstances', 'icon', 'id', 'title'] },
 		{ page: ['elements', 'id', 'zIndex'] },
 		{ snackbar: ['message'] },
-		{ tab: ['buttons'] },
+		{ tab: ['buttonInstances'] },
 		{ textarea: ['className', 'hidden', 'id', 'placeholder', 'readonly', 'text'] }
 	]
 
@@ -25,7 +25,7 @@ class ConfigVerifier {
 			'title',
 			'type'
 		],
-		array: ['buttons', 'events'],
+		array: ['buttonInstances', 'events'],
 		boolean: ['hidden', 'readonly', 'state'],
 		number: ['zIndex'],
 		object: ['elements']

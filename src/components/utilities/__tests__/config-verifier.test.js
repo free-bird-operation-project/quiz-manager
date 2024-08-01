@@ -125,7 +125,7 @@ describe('ConfigVerifier', () => {
 
 		it('should validate all attributes for the modal component', () => {
 			const validModalConfig = new ConfigVerifier('modal', {
-				buttons: [],
+				buttonInstances: [],
 				icon: 'icon',
 				id: 'modal1',
 				title: 'Modal Title'
@@ -135,7 +135,7 @@ describe('ConfigVerifier', () => {
 
 		it('should reject config with extra attributes for the modal component', () => {
 			const extraAttributesModalConfig = new ConfigVerifier('modal', {
-				buttons: [],
+				buttonInstances: [],
 				icon: 'icon',
 				id: 'modal1',
 				extra: 'extra'
@@ -171,7 +171,7 @@ describe('ConfigVerifier', () => {
 		})
 
 		it('should validate all attributes for the tab component', () => {
-			const validTabConfig = new ConfigVerifier('tab', { buttons: [] })
+			const validTabConfig = new ConfigVerifier('tab', { buttonInstances: [] })
 			expect(validTabConfig.initialize()).toBe(true)
 		})
 
@@ -266,7 +266,7 @@ describe('ConfigVerifier', () => {
 
 		it('should validate correct attribute types for modal component', () => {
 			const validModalConfig = new ConfigVerifier('modal', {
-				buttons: [],
+				buttonInstances: [],
 				icon: 'icon',
 				id: 'modal1',
 				title: 'Modal Title'
@@ -309,7 +309,7 @@ describe('ConfigVerifier', () => {
 		})
 
 		it('should validate correct attribute types for tab component', () => {
-			const validTabConfig = new ConfigVerifier('tab', { buttons: [] })
+			const validTabConfig = new ConfigVerifier('tab', { buttonInstances: [] })
 			expect(validTabConfig.initialize()).toBe(true)
 		})
 
