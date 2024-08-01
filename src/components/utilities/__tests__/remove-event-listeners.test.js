@@ -69,4 +69,11 @@ describe('removeEventListeners', () => {
 
 		spyConsoleError.mockRestore()
 	})
+
+	it('should handle elements with no event listeners attached', () => {
+		const element = document.createElement('div')
+		const events = [{ type: 'click', func: () => {} }]
+		const result = removeEventListeners(element, events)
+		expect(result).toBe(true)
+	})
 })
