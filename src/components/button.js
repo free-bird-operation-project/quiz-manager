@@ -1,93 +1,79 @@
-import { isConfigVerified } from '@utilities/config/config-verifier'
-import { setEvents } from '@utilities/components/set-events'
-import { setAttributes } from '@utilities/components/set-attributes'
-import { removeEvents } from '@utilities/components/remove-events'
+import './styles/button.scss'
+import { BaseComponent } from './base-component'
+import { sanitizeValue } from '@utilities/sanitize-value'
+import { addEventListeners } from './utilities/add-event-listeners'
+import { removeEventListeners } from './utilities/remove-event-listeners'
 
-class Button {
-	#config
+/**
+ * @typedef {Object} ButtonConfig
+ * @property {string} [id] - The ID of the button. If not provided, a default ID will be used.
+ * @property {string} [className] - The class name(s) to be applied to the button.
+ * @property {string} [icon] - The name of the icon to be displayed on the button.
+ * @property {string} [text] - The text content of the button.
+ * @property {string} [type='transparent'] - The type of the button, which affects its styling. Default is 'transparent'.
+ * @property {Array<{type: string, func: Function}>} [events] - An array of event listener objects with `type` and `func` properties.
+ */
 
+/**
+ * Represents a Button component.
+ */
+class Button extends BaseComponent {
+	/**
+	 * Initializes the button instance with the provided configuration.
+	 *
+	 * @param {ButtonConfig} config - The configuration object for the button.
+	 */
 	constructor(config) {
-		this.#config = isConfigVerified('button', config) ? config : {}
+		super(config)
+		this.config = sanitizeValue(config, 'object')
 	}
 
+	/**
+	 * Creates and returns the button element based on the provided configuration.
+	 * If either an icon or text is present in the configuration, it adds them to the button.
+	 * Attaches event listeners to the button based on the events provided in the configuration.
+	 *
+	 * @returns {Element|null} The created button element or null if neither icon nor text is provided.
+	 */
 	create() {
-		const { type, id, class_name, icon, events } = this.#config
-		let { text } = this.#config
-
-		const node = this.#createNode(icon, text, id, class_name, type)
-		const BUTTON = setEvents(node, events)
-
-		return BUTTON
-	}
-
-	remove() {
-		const { id, events } = this.#config
-		if (!id) return
-		if (!events) return
-
-		let BUTTON = document.getElementById(`button-${id}`)
-
-		if (!BUTTON) return
-
-		removeEvents(BUTTON, events)
-		BUTTON.remove()
-		BUTTON = null
-	}
-
-	#createNode(icon, text, id, class_name, type) {
-		let node
-
-		switch (type) {
-			case 'rounded-square':
-				text = undefined
-				node = this.#createContainer(icon, text, id, class_name, 'rounded-square')
-				break
-			case 'slab':
-				if (!text && !icon) return
-				node = this.#createContainer(icon, text, id, class_name, 'slab')
-				break
-			default:
-				if (!text && !icon) return
-				node = this.#createContainer(icon, text, id, class_name, 'transparent')
-		}
-
-		return node
-	}
-
-	#createContainer(icon, text, id, class_name, type) {
-		const BUTTON = document.createElement('div')
-		setAttributes(BUTTON, {
+		const {
+			className,
+			events,
+			icon,
+			id,
+			text,
+			type = 'transparent'
+		} = this.config
+		const button = this._createContainer('div', {
 			id: `button-${id}`,
-			class: `${class_name} button ${type}-button`.trim()
+			class: `${className} button ${type}-button`
 		})
 
-		if (icon) {
-			const ICON_WRAPPER = this.#createIcon(icon)
-			BUTTON.appendChild(ICON_WRAPPER)
-		}
+		if (!icon && !text) return null
+		if (icon) button.appendChild(this._createIcon(icon))
+		if (text) button.appendChild(this._createText(text))
+		addEventListeners(button, events)
 
-		if (text) {
-			const TEXT = this.#createText(text)
-			BUTTON.appendChild(TEXT)
-		}
-
-		return BUTTON
+		return button
 	}
 
-	#createIcon(icon) {
-		const ICON_WRAPPER = document.createElement('i')
-		setAttributes(ICON_WRAPPER, {
-			'data-lucide': icon
-		})
+	/**
+	 * Removes the button element from the DOM along with its event listeners based on the provided configuration.
+	 *
+	 * @returns {boolean} Returns true if the button element is successfully removed, otherwise false.
+	 */
+	remove() {
+		const { events, id } = this.config
+		const elementId = `button-${id}`
+		const button = document.getElementById(elementId)
 
-		return ICON_WRAPPER
-	}
+		if (button) {
+			removeEventListeners(button, events)
+			button.remove()
+			return true
+		}
 
-	#createText(text) {
-		const TEXT = document.createElement('p')
-		TEXT.textContent = text
-
-		return TEXT
+		return false
 	}
 }
 
