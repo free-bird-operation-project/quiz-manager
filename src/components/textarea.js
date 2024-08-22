@@ -1,66 +1,69 @@
-import { isConfigVerified } from '@utilities/config/config-verifier'
-import { setAttributes } from '@utilities/components/set-attributes'
+import { BaseComponent } from './base-component'
+import { sanitizeValue } from '@utilities/sanitize-value'
 
-class Textarea {
-	#config
-
+class Textarea extends BaseComponent {
 	constructor(config) {
-		this.#config = isConfigVerified('textarea', config) ? config : {}
+		super(config)
+		this.config = sanitizeValue(config)
 	}
 
 	create() {
-		const { id, class_name, placeholder, text, readonly, hidden } = this.#config
-		const TEXTAREA = this.#createContainer(id, class_name, placeholder, text, readonly, hidden)
+		const { id, className, placeholder, text, readOnly, hidden } = this.config
+		const textarea = this._createContainer(
+			'div',
+			{
+				id: `textarea-${id}`,
+				class: `textarea-${className} textarea`,
+				placeholder: placeholder
+			},
+			{
+				readOnly: readOnly,
+				hidden: hidden
+			}
+		)
+		const textForTextarea = this._createText(text)
+		textarea.appendChild(textForTextarea)
 
-		return TEXTAREA
+		return textarea
 	}
 
 	remove() {
-		const { id } = this.#config
-		let TEXTAREA = document.getElementById(`textarea-${id}`)
+		const { id } = this.config
+		const elementId = `textarea-${id}`
+		const textarea = document.getElementById(elementId)
 
-		if (!TEXTAREA) return
-		TEXTAREA.remove()
-		TEXTAREA = null
+		if (textarea) {
+			textarea.remove()
+			return true
+		}
+
+		return false
 	}
 
 	lock() {
-		const { id } = this.#config
-		let TEXTAREA = document.getElementById(`textarea-${id}`)
+		const { id } = this.config
+		const elementId = `textarea-${id}`
+		const textarea = document.getElementById(elementId)
 
-		if (!TEXTAREA) return
-		TEXTAREA.setAttribute('readonly', true)
+		if (textarea) {
+			textarea.readOnly = true
+			return true
+		}
+
+		return false
 	}
 
 	unlock() {
-		const { id } = this.#config
-		let TEXTAREA = document.getElementById(`textarea-${id}`)
+		const { id } = this.config
+		const elementId = `textarea-${id}`
+		const textarea = document.getElementById(elementId)
 
-		if (!TEXTAREA) return
-		TEXTAREA.removeAttribute('readonly')
-	}
-
-	#createContainer(id, class_name, placeholder, text, readonly, hidden) {
-		if (!id) return
-
-		const TEXTAREA = document.createElement('textarea')
-		setAttributes(TEXTAREA, {
-			id: `textarea-${id}`,
-			class: `textarea-${class_name} textarea`,
-			placeholder: placeholder
-		})
-
-		if (readonly) {
-			TEXTAREA.setAttribute('readonly', true)
+		if (textarea) {
+			textarea.readOnly = false
+			return true
 		}
 
-		if (hidden) {
-			TEXTAREA.setAttribute('hidden', true)
-		}
-
-		TEXTAREA.textContent = text
-
-		return TEXTAREA
+		return false
 	}
 }
 
