@@ -1,60 +1,51 @@
-import { isConfigVerified } from '@utilities/config/config-verifier'
-import { setAttributes } from '@utilities/components/set-attributes'
+import { sanitizeValue } from '@utilities/sanitize-value'
 
 class Snackbar {
-	static #snackbar_queue = []
-	static #is_displaying = false
-
-	#config
+	static queue = []
+	static isDisplaying = false
 
 	constructor(config) {
-		this.#config = isConfigVerified('snackbar', config) ? config : {}
+		this.config = sanitizeValue(config, 'object')
 	}
 
 	renderThenRemove() {
-		const { message } = this.#config
+		const { message } = this.config
 		Snackbar.#enqueue(message)
 	}
 
 	static #enqueue(message) {
-		Snackbar.#snackbar_queue.push(message)
+		Snackbar.queue.push(message)
 		Snackbar.#processQueue()
 	}
 
 	static #processQueue() {
-		if (Snackbar.#is_displaying || Snackbar.#snackbar_queue.length === 0) {
+		if (Snackbar.isDisplaying || Snackbar.queue.length === 0) {
 			return
 		}
 
-		Snackbar.#is_displaying = true
-		const message = Snackbar.#snackbar_queue.shift()
+		Snackbar.isDisplaying = true
+		const message = Snackbar.queue.shift()
 		Snackbar.#display(message)
 	}
 
 	static #display(message) {
-		const existing_snackbar = document.getElementById('snackbar')
-		if (existing_snackbar) {
-			existing_snackbar.remove()
+		const isSnackbar = document.getElementById('snackbar')
+
+		if (isSnackbar) {
+			isSnackbar.remove()
 		}
 
-		const SNACKBAR = Snackbar.#create(message)
-		document.body.appendChild(SNACKBAR)
+		const snackbar = document.createElement('div')
+		snackbar.classList.add('snackbar')
+		snackbar.id = snackbar
 
-		Snackbar.#remove(SNACKBAR)
+		snackbar.textContent = message
+		document.body.appendChild(snackbar)
+
+		Snackbar.#remove(snackbar)
 	}
 
-	static #create(message) {
-		const SNACKBAR = document.createElement('div')
-		setAttributes(SNACKBAR, {
-			class: 'snackbar',
-			id: 'snackbar'
-		})
-		SNACKBAR.textContent = message
-
-		return SNACKBAR
-	}
-
-	static #remove(SNACKBAR) {
+	static #remove(snackbar) {
 		let start
 		const duration = 3000
 
@@ -64,9 +55,9 @@ class Snackbar {
 			const progress = timestamp - start
 
 			if (progress > duration) {
-				SNACKBAR.remove()
-				SNACKBAR = null
-				Snackbar.#is_displaying = false
+				snackbar.remove()
+				snackbar = null
+				Snackbar.isDisplaying = false
 				Snackbar.#processQueue()
 				return
 			}
