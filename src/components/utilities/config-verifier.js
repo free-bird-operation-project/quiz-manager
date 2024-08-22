@@ -10,7 +10,7 @@ class ConfigVerifier {
 		{ page: ['elements', 'id', 'zIndex'] },
 		{ snackbar: ['message'] },
 		{ tab: ['buttonInstances'] },
-		{ textarea: ['className', 'hidden', 'id', 'placeholder', 'readonly', 'text'] }
+		{ textarea: ['className', 'hidden', 'id', 'placeholder', 'readOnly', 'text'] }
 	]
 
 	#validAttributesTypesList = {
