@@ -3,7 +3,7 @@ import { sanitizeValue } from '@utilities/sanitize-value'
 
 /**
  * @typedef {Object} TabConfig
- * @property {BaseComponent[]} buttonInstances - An array of button instances that will be added to the tab.
+ * @property {Array<Instance>} buttonInstances - An array of button instances that will be added to the tab.
  */
 
 /**

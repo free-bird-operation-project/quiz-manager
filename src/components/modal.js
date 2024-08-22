@@ -2,13 +2,21 @@ import { BaseComponent } from './base-component'
 import { sanitizeValue } from '@utilities/sanitize-value'
 
 /**
+ * @typedef {Object} ModalConfig
+ * @property {string} id - The ID of the modal.
+ * @property {string} icon - The name of the icon to be displayed on the modal.
+ * @property {string} title - The title of the modal.
+ * @property {Array<Instance>} buttonInstances - An array of button instances for modal.
+ */
+
+/**
  * Represents a Modal component.
  */
 class Modal extends BaseComponent {
 	/**
 	 * Initializes the modal instance with the provided configuration.
 	 *
-	 * @param {Object} config - The configuration object for the modal.
+	 * @param {ModalConfig} config - The configuration object for the modal.
 	 */
 	constructor(config) {
 		super(config)

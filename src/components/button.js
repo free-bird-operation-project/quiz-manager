@@ -6,12 +6,12 @@ import { removeEventListeners } from './utilities/remove-event-listeners'
 
 /**
  * @typedef {Object} ButtonConfig
- * @property {string} [id] - The ID of the button. If not provided, a default ID will be used.
- * @property {string} [className] - The class name(s) to be applied to the button.
+ * @property {string} id - The ID of the button. If not provided, a default ID will be used.
+ * @property {string} className - The class name(s) to be applied to the button.
  * @property {string} [icon] - The name of the icon to be displayed on the button.
  * @property {string} [text] - The text content of the button.
- * @property {string} [type='transparent'] - The type of the button, which affects its styling. Default is 'transparent'.
- * @property {Array<{type: string, func: Function}>} [events] - An array of event listener objects with `type` and `func` properties.
+ * @property {string} type='transparent' - The type of the button, which affects its styling. Default is 'transparent'.
+ * @property {Array<{type: string, func: Function}>} events - An array of event listener objects with `type` and `func` properties.
  */
 
 /**

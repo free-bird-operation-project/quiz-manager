@@ -7,6 +7,11 @@ import { setProperties } from './utilities/set-properties'
  * Utilizes the `sanitizeValue` function to validate inputs and the `setAttributes` function to set attributes on elements.
  */
 class BaseComponent {
+	/**
+	 * Initializes the base component instance with the provided configuration.
+	 *
+	 * @param {Object} config - The configuration object.
+	 */
 	constructor(config) {
 		this.config = sanitizeValue(config, 'object') || {}
 	}

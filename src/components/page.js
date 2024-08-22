@@ -2,12 +2,34 @@ import { BaseComponent } from './base-component'
 import { sanitizeValue } from '@utilities/sanitize-value'
 import { Button } from './button'
 
+/**
+ * @typedef {Object} PageConfig
+ * @property {string} id - The ID of the page.
+ * @property {object} elements - The object consist of elements for page.
+ * @property {number} zIndex - The z-index of the page.
+ */
+
+/**
+ * Represents a Page component.
+ */
 class Page extends BaseComponent {
+	/**
+	 * Initializes the page instance with the provided configuration.
+	 *
+	 * @param {PageConfig} config - The configuration object for the page.
+	 */
 	constructor(config) {
 		super(config)
 		this.config = sanitizeValue(config, 'object')
 	}
 
+	/**
+	 * Creates a page element based on the provided configuration.
+	 * Adds a header with an exit button if the z-index is greater than 10.
+	 * Appends header and body elements to the page based on the elements in the configuration.
+	 *
+	 * @returns {Element} The created page element.
+	 */
 	create() {
 		const { elements, zIndex, id } = this.config
 		const page = this._createContainer('div', {
@@ -60,6 +82,11 @@ class Page extends BaseComponent {
 		return page
 	}
 
+	/**
+	 * Removes the page element from the DOM along with its header and body elements if they exist.
+	 *
+	 * @returns {boolean} Returns true if the page element was successfully removed, otherwise false.
+	 */
 	remove() {
 		const { elements, id } = this.config
 
