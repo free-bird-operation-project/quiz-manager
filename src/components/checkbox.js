@@ -1,154 +1,43 @@
-import { isConfigVerified } from '@utilities/config/config-verifier'
-import { setAttributes } from '@utilities/components/set-attributes'
+import { sanitizeValue } from '@utilities/sanitize-value'
+import { BaseComponent } from './base-component'
 
-class Checkbox {
-	#config
-	#click_event_handler
-
+class Checkbox extends BaseComponent {
 	constructor(config) {
-		this.#config = isConfigVerified('checkbox', config) ? config : {}
-		this.#click_event_handler = this.#handleClick.bind(this)
+		super(config)
+		this.config = sanitizeValue(config, 'object')
 	}
 
 	create() {
-		const { id, class_name, target_id, group_name, hidden } = this.#config
+		const { id, className, targetId, groupName, hidden } = this.config
 
-		this.#removeLocalStorageCheckboxesItems()
+		const checkbox = this._createContainer(
+			'div',
+			{
+				'id': `checkbox-${id}`,
+				'class': `${className} checkboxes`,
+				'data-state': 'false',
+				'data-group-name': `checkboxes-${groupName}`,
+				'data-target-id': targetId
+			},
+			{
+				hidden: hidden
+			}
+		)
 
-		const node = this.#createNode(id, class_name, target_id, group_name, hidden)
-		const CHECKBOX = this.#setEvents(node)
-
-		return CHECKBOX
+		return checkbox
 	}
 
 	remove() {
-		const { id } = this.#config
-		if (!id) return
+		const { id } = this.config
+		const elementId = `checkbox-${id}`
+		const checkbox = document.getElementById(elementId)
 
-		let CHECKBOX = document.getElementById(id)
-
-		if (!CHECKBOX) return
-
-		CHECKBOX.removeEventListener('click', this.#click_event_handler)
-		CHECKBOX.remove()
-		CHECKBOX = null
-
-		this.#removeLocalStorageCheckboxesItems()
-	}
-
-	#handleClick(node) {
-		const current_state = node.dataset.state
-		const new_state = this.#changeState(current_state)
-		node.dataset.state = new_state
-
-		const icon = node.querySelector('i')
-		const new_icon = this.#changeIcon(icon, new_state)
-		icon.dataset.lucide = new_icon
-
-		this.#manageTargets(node.dataset.groupName, node.dataset.targetId, new_state)
-	}
-
-	#changeState(state) {
-		return state === 'false' ? 'true' : 'false'
-	}
-
-	#setEvents(node) {
-		node.addEventListener('click', () => {
-			this.#click_event_handler(node)
-		})
-
-		return node
-	}
-
-	#changeIcon(icon, state) {
-		if (state === 'true') {
-			icon.dataset.lucide = 'square-check'
-		} else {
-			icon.dataset.lucide = 'square'
-		}
-		return icon.dataset.lucide
-	}
-
-	#createIcon() {
-		const icon = document.createElement('i')
-		setAttributes(icon, {
-			'data-lucide': 'square'
-		})
-		icon.textContent = 'Squares'
-
-		return icon
-	}
-
-	#createNode(id, class_name, target_id, group_name, hidden) {
-		const node = document.createElement('div')
-		const icon = this.#createIcon()
-
-		setAttributes(node, {
-			'id': id,
-			'class': `${class_name} checkboxes`.trim(),
-			'data-state': 'false',
-			'data-group-name': `${group_name}-checkboxes`,
-			'data-target-id': target_id
-		})
-
-		if (hidden) {
-			node.setAttribute('hidden', true)
+		if (checkbox) {
+			checkbox.remove()
+			return true
 		}
 
-		node.appendChild(icon)
-
-		return node
-	}
-
-	#manageTargets(group_name, target_id, state) {
-		if (state === 'true') {
-			return this.#addTarget(group_name, target_id)
-		}
-
-		return this.#removeTarget(group_name, target_id)
-	}
-
-	#addTarget(group_name, target_id) {
-		let list_of_targets = this.#getTargetsFromStorage(group_name)
-
-		if (list_of_targets.includes(target_id)) return
-
-		list_of_targets.push(target_id)
-		this.#setTargetsInStorage(group_name, list_of_targets)
-
-		return list_of_targets
-	}
-
-	#removeTarget(group_name, target_id) {
-		let list_of_targets = this.#getTargetsFromStorage(group_name)
-		const index = list_of_targets.indexOf(target_id)
-
-		if (index !== -1) {
-			list_of_targets.splice(index, 1)
-			this.#setTargetsInStorage(group_name, list_of_targets)
-		}
-
-		return list_of_targets
-	}
-
-	#getTargetsFromStorage(group_name) {
-		const suffixed_group_name = `${group_name}-checkboxes`
-		return JSON.parse(localStorage.getItem(suffixed_group_name)) || []
-	}
-
-	#setTargetsInStorage(group_name, targets) {
-		const suffixed_group_name = `${group_name}-checkboxes`
-		localStorage.setItem(suffixed_group_name, JSON.stringify(targets))
-	}
-
-	#removeLocalStorageCheckboxesItems() {
-		const suffix = '-checkboxes'
-
-		for (let key in localStorage) {
-			if (key.endsWith(suffix)) {
-				localStorage.removeItem(key)
-			}
-		}
+		return false
 	}
 }
 
