@@ -1,77 +1,73 @@
-import { isConfigVerified } from '@utilities/config/config-verifier'
-import { setAttributes } from '@utilities/components/set-attributes'
+import { BaseComponent } from './base-component'
+import { sanitizeValue } from '@utilities/sanitize-value'
 
-class Modal {
-	#config
-
+/**
+ * Represents a Modal component.
+ */
+class Modal extends BaseComponent {
+	/**
+	 * Initializes the modal instance with the provided configuration.
+	 *
+	 * @param {Object} config - The configuration object for the modal.
+	 */
 	constructor(config) {
-		this.#config = isConfigVerified('modal', config) ? config : {}
+		super(config)
+		this.config = sanitizeValue(config, 'object')
 	}
 
+	/**
+	 * Creates the modal element based on the provided configuration.
+	 *
+	 * @returns {HTMLElement|null} The created modal element or null if invalid configuration.
+	 */
 	create() {
-		const { id, title, icon, buttons } = this.#config
-		const MODAL = this.#createModalContainer(id, title, icon, buttons)
+		const { id, title, icon, buttons } = this.config
 
-		return MODAL
-	}
-
-	remove() {
-		const { id, buttons } = this.#config
-
-		if (id && document.getElementById(id)) {
-			const MODAL = document.getElementById(id)
-
-			this.#removeButtonsEvents(buttons)
-
-			MODAL.remove()
-		}
-	}
-
-	#createModalContainer(id, title, icon, buttons) {
-		const MODAL = document.createElement('div')
-		setAttributes(MODAL, {
-			id: id,
+		const modal = this._createContainer('div', {
+			id: `modal-${id}`,
 			class: 'modal'
 		})
 
-		const BUTTONS = this.#modifyButtons(buttons)
-		const title_container = document.createElement('div')
-		const icon_holder = document.createElement('i')
-		const title_text = document.createElement('p')
-
-		setAttributes(icon_holder, {
-			'data-lucide': icon
+		const titleContainer = this._createContainer('div', {
+			class: 'modal-title-container'
 		})
+		const iconHolder = this._createIcon(icon)
+		const titleText = this._createText(title)
 
-		title_text.textContent = title
-		title_container.appendChild(icon_holder)
-		title_container.appendChild(title_text)
-		MODAL.appendChild(title_container)
+		if (iconHolder) titleContainer.appendChild(iconHolder)
+		if (titleText) titleContainer.appendChild(titleText)
 
-		BUTTONS.forEach((button) => {
-			MODAL.appendChild(button)
-		})
-
-		return MODAL
-	}
-
-	#modifyButtons(buttons) {
-		const button_array = []
+		modal.appendChild(titleContainer)
 
 		buttons.forEach((button, index) => {
 			button.id = `modal-button-${index}`
-			button_array.push(button)
+			modal.appendChild(button)
 		})
 
-		return button_array
+		return modal
 	}
 
-	#removeButtonsEvents(buttons) {
-		buttons.forEach((button) => {
-			const clone_button = button.cloneNode(true)
-			button.replaceWith(clone_button)
-			button = null
+	/**
+	 * Removes the modal element and its buttons from the DOM.
+	 */
+	remove() {
+		const { id, buttonInstances } = this.config
+
+		let allRemoved = true
+
+		buttonInstances.forEach((buttonInstance) => {
+			try {
+				if (!buttonInstance.remove()) {
+					allRemoved = false
+				}
+			} catch (error) {
+				console.error(`Error: ${error}`)
+				allRemoved = false
+			}
 		})
+
+		const modalRemoved = this._removeById(id)
+		return allRemoved && modalRemoved
 	}
 }
 
