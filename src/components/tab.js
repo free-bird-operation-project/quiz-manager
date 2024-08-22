@@ -1,74 +1,72 @@
-import { isConfigVerified } from '@utilities/config/config-verifier'
-import { setAttributes } from '@utilities/components/set-attributes'
+import { BaseComponent } from './base-component'
+import { sanitizeValue } from '@utilities/sanitize-value'
 
-class Tab {
-	#config
+/**
+ * @typedef {Object} TabConfig
+ * @property {BaseComponent[]} buttonInstances - An array of button instances that will be added to the tab.
+ */
 
+/**
+ * Represents a Tab component.
+ */
+class Tab extends BaseComponent {
+	/**
+	 * Initializes the Tab instance with the provided configuration.
+	 *
+	 * @param {TabConfig} config - The configuration object for the tab.
+	 */
 	constructor(config) {
-		this.#config = isConfigVerified('tab', config) ? config : {}
+		super(config)
+		this.config = sanitizeValue(config, 'object')
 	}
 
+	/**
+	 * Creates and returns a tab element based on the configuration provided.
+	 * Iterates over the button instances in the configuration, creates corresponding buttons,
+	 * adds a specific class to each button, and appends them to the tab element.
+	 *
+	 * @returns {HTMLElement} The created tab element.
+	 */
 	create() {
-		const { buttons } = this.#config
+		const { buttonInstances } = this.config
+		const tab = this._createContainer('div', {
+			id: 'tab',
+			class: 'tab'
+		})
 
-		const TAB = this.#createContainer(buttons)
+		for (const buttonInstance of buttonInstances) {
+			const button = buttonInstance.create()
+			button.classList.add('tab-button')
+			tab.appendChild(button)
+		}
 
-		return TAB
+		return tab
 	}
 
+	/**
+	 * Removes all button instances associated with the tab.
+	 * Catches any errors that occur during the removal process and logs them.
+	 * Finally, removes the tab element by its ID 'tab'.
+	 *
+	 * @returns {boolean} Returns true if all button instances are successfully removed, false otherwise.
+	 */
 	remove() {
-		let TAB = document.getElementById('tab')
+		const { buttonInstances } = this.config
+		let allRemoved = true
 
-		let { buttons } = this.#config
-
-		if (!buttons) return
-
-		this.#removeButtonsEvents(buttons)
-
-		if (!TAB) return
-		TAB.remove()
-		TAB = null
-	}
-
-	#createContainer(buttons) {
-		const raw_container = document.createElement('div')
-		setAttributes(raw_container, {
-			class: `tab`,
-			id: 'tab'
+		buttonInstances.forEach((buttonInstance) => {
+			try {
+				if (!buttonInstance.remove()) {
+					allRemoved = false
+				}
+			} catch (error) {
+				console.error(`Error: ${error}`)
+				allRemoved = false
+			}
 		})
 
-		const modified_buttons = this.#modifyButtons(buttons)
-
-		const TAB = this.#createButtonsContainer(raw_container, modified_buttons)
-
-		return TAB
-	}
-
-	#createButtonsContainer(container, buttons) {
-		buttons.forEach((button) => {
-			container.appendChild(button)
-		})
-
-		return container
-	}
-
-	#modifyButtons(buttons) {
-		const button_array = []
-
-		buttons.forEach((button, index) => {
-			button.id = `tab-button-${index}`
-			button_array.push(button)
-		})
-
-		return button_array
-	}
-
-	#removeButtonsEvents(buttons) {
-		buttons.forEach((button) => {
-			const clone_button = button.cloneNode(true)
-			button.replaceWith(clone_button)
-			button = null
-		})
+		const tabRemoved = this._removeById('tab')
+		return allRemoved && tabRemoved
 	}
 }
 
