@@ -12,7 +12,7 @@ class Textarea extends BaseComponent {
 	 */
 	constructor(config) {
 		super(config)
-		this.config = sanitizeValue(config)
+		this.config = sanitizeValue(config, 'object')
 	}
 
 	/**
