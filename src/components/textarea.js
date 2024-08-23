@@ -2,13 +2,23 @@ import { BaseComponent } from './base-component'
 import { sanitizeValue } from '@utilities/sanitize-value'
 
 /**
+ * @typedef {Object} TextareaConfig
+ * @property {string} id - The ID of the textarea.
+ * @property {string} className - The class name(s) to be applied to the textarea.
+ * @property {string} placeholder - The placeholder of the textarea.
+ * @property {string} [text] - The text value of the textarea.
+ * @property {boolean} [readOnly] - Indicates whether the textarea is read-only.
+ * @property {boolean} [hidden] - The visibility of the textarea
+ */
+
+/**
  * Represents a Textarea component.
  */
 class Textarea extends BaseComponent {
 	/**
 	 * Initializes the textarea instance with the provided configuration.
 	 *
-	 * @param {Object} config - The configuration object for the textarea.
+	 * @param {TextareaConfig} config - The configuration object for the textarea.
 	 */
 	constructor(config) {
 		super(config)
