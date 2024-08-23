@@ -23,7 +23,7 @@ class Textarea extends BaseComponent {
 	create() {
 		const { id, className, placeholder, text, readOnly, hidden } = this.config
 		const textarea = this._createContainer(
-			'div',
+			'textarea',
 			{
 				id: `textarea-${id}`,
 				class: `textarea-${className} textarea`,
@@ -34,8 +34,10 @@ class Textarea extends BaseComponent {
 				hidden: hidden
 			}
 		)
-		const textForTextarea = this._createText(text)
-		textarea.appendChild(textForTextarea)
+
+		if (text) {
+			textarea.value = text
+		}
 
 		return textarea
 	}
